@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/px60"
+        android:layout_gravity="center"
+        android:text="天气与网络测试文本" />
+    <Button
+        android:id="@+id/btn_share"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp35"
+        android:layout_marginRight="@dimen/dp20"
+        android:text="分享"
+        android:layout_marginLeft="@dimen/dp20"
+        style="@style/BtnStyleLargeApp" />
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp35"
+        android:text="扫描"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        style="@style/BtnStyleLargeApp" />
+</LinearLayout>

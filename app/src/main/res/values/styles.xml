@@ -1,0 +1,68 @@
+<resources>
+    <style name="AppTheme" parent="AppGoneTitleTheme">
+    </style>
+    <style name="AppGoneTitleTheme" parent="AppBaseTheme" >
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+    </style>
+
+<!-- Popup -->
+    <style name="PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+<!-- End -->
+
+<!-- TextSize -->
+    <style name="TextSizeHuge">
+        <item name="android:textSize">@dimen/px40</item>
+    </style>
+    <style name="TextSizeLarge">
+        <item name="android:textSize">@dimen/px36</item>
+    </style>
+    <style name="TextSizeMedium">
+        <item name="android:textSize">@dimen/px32</item>
+    </style>
+<!-- End -->
+
+<!-- TextView -->
+    <style name="TvStyleHugeWhite" parent="TextSizeHuge">
+        <item name="android:textColor">@color/col_app_white_text</item>
+    </style>
+    <style name="TvStyleLargeWhite" parent="TextSizeLarge">
+        <item name="android:textColor">@color/col_app_white_text</item>
+    </style>
+    <style name="TvStyleMediumWhite" parent="TextSizeMedium">
+        <item name="android:textColor">@color/col_app_white_text</item>
+    </style>
+    <style name="TvStyleMediumApp" parent="TextSizeMedium">
+        <item name="android:textColor">@color/col_app</item>
+    </style>
+    <style name="TvStyleMediumGrey" parent="TextSizeMedium">
+        <item name="android:textColor">@color/col_app_grey_text</item>
+    </style>
+<!-- End -->
+
+<!-- EditView -->
+    <style name="EdtStyleMediumGrey" parent="TvStyleMediumGrey">
+        <item name="android:textColorHint">@color/letter_grey_deep_13</item>
+    </style>
+    <style name="EdtSingleLineStyleMediumGrey" parent="EdtStyleMediumGrey">
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="EdtPasswordStyle" parent="EdtSingleLineStyleMediumGrey">
+        <item name="android:inputType">textPassword</item>
+    </style>
+<!-- End -->
+
+<!-- Button -->
+    <style name="BtnStyleLargeApp" parent="TvStyleLargeWhite">
+        <item name="android:background">@drawable/selector_round_none_frame_app_bg</item>
+    </style>
+    <style name="BtnStyleMediumFunction" parent="TvStyleMediumApp">
+        <item name="android:background">@drawable/selector_square_app_frame_appgrey_bg</item>
+    </style>
+<!-- End -->
+
+</resources>

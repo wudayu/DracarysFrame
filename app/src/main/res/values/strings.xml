@@ -1,0 +1,58 @@
+<resources>
+	<!-- 常用 -->
+	<string name="app_name">Yaoyijia</string>
+	<!-- 系统 -->
+    <string name="str_double_close">再次点击后退键退出</string>
+	<!-- 工具 -->
+    <string name="error_can_not_find_sdcard">SD卡无效</string>
+	<!-- 图片弹出框 -->
+    <string name="btn_take_photo">拍照</string>
+    <string name="btn_pick_photo">从相册中选择</string>
+    <string name="btn_select_pic_cancel">取消</string>
+	<!-- 加载框 -->
+    <string name="str_loading">载入中&#8230;</string>
+	<!-- 主界面 -->
+	<string name="page_select_01">首页</string>
+	<string name="page_select_02">页面2</string>
+	<string name="page_select_03">页面3</string>
+    <string name="page_select_04">页面4</string>
+	<!-- 测试页面 -->
+	<string name="tv_test_activity_test">testteste\ntest</string>
+	<!-- 错误信息 -->
+    <string name="error_cannot_connect_server">无法连接服务器，请检查您的网络</string>
+    <string name="error_data_format_wrong">服务器返回数据错误</string>
+    <string name="error_server_got_problems">服务其出错，请稍后再试</string>
+    <string name="error_unexpected_error">发生了不可预料的错误</string>
+	<string name="error_local_database_has_no_data">没有本地数据</string>
+	<string name="error_local_database_connot_be_connected">无法连接本地数据</string>
+    <string name="error_got_uncaught_exception">发生不可预料的错误，请谅解</string>
+    <!-- 交易结果页面 -->
+    <string name="tv_pay_note">支付提示</string>
+    <string name="tv_order_pay_success">订单支付成功</string>
+    <string name="tv_order_pay_fail">订单支付失败</string>
+    <string name="tv_my_order">查看订单</string>
+    <string name="tv_continue_purchase">继续团购</string>
+    <string name="tv_order_pay_title">你可以进入订单管理查看订单状态</string>
+    <!-- 下拉刷新控件 -->
+    <string name="str_ptr_pull_text">下拉刷新</string>
+    <string name="str_ptr_refreshing_text">加载中</string>
+    <string name="str_ptr_release_text">松开</string>
+    <!-- 登录界面 -->
+    <string name="tv_cancel">取消</string>
+    <string name="tv_name_taken">请登录</string>
+    <string name="edt_username_hint">请输入账号</string>
+    <string name="edt_password_hint">请输入密码</string>
+    <string name="chk_remember_password">记住密码</string>
+    <string name="btn_login">登录</string>
+    <string name="btn_forget_password">忘记密码?</string>
+    <string name="btn_register_immediately">立即注册</string>
+    <string name="tv_identity_prefix">我是</string>
+    <!-- 首页 -->
+    <string name="str_title_home">首页</string>
+    <!-- 页面2 -->
+    <string name="str_title_circle">页面2</string>
+    <!-- 页面3 -->
+    <string name="str_title_purchase">页面3</string>
+    <!-- 页面4 -->
+    <string name="str_title_mine">页面4</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ptr_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_title_height"
+        layout="@layout/layout_title" />
+    <LinearLayout
+        android:id="@+id/ll_buttons_way"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:layout_below="@id/layout_title"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/btn_transit"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/mode_transit" />
+        <Button
+            android:id="@+id/btn_driving"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/mode_driving" />
+        <Button
+            android:id="@+id/btn_walk"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/mode_walk" />
+    </LinearLayout>
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/amv_main"
+        android:layout_below="@id/ll_buttons_way"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+</RelativeLayout>
