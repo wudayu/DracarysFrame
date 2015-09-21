@@ -40,6 +40,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             synchronized (CrashHandler.class) {
                 if (instance == null) {
                     instance = new CrashHandler();
+                    // 设置CrashHandler
                     Thread.setDefaultUncaughtExceptionHandler(instance);
                 }
             }

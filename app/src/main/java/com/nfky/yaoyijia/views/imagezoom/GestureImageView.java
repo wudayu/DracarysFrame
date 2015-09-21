@@ -28,7 +28,7 @@ import android.widget.ImageView;
  *
  * Created by David on 8/27/15.
  *
- * @Description: imagezoom整个包都是用来支持可控制放大缩小的GestureImageView的控件，可以直接将ImageView用GestureImageView替换
+ * imagezoom整个包都是用来支持可控制放大缩小的GestureImageView的控件，可以直接将ImageView用GestureImageView替换
  *
  **/
 

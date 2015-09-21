@@ -92,8 +92,6 @@ public class MainActivity extends BaseActivity {
 
 				if (pos == 3)
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
-				if (pos == 2)
-					throw new NullPointerException();
 			}
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {}

@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.nfky.yaoyijia.views.refreshrecycler.PullToLoadView
-        android:id="@+id/ptl_pull_load_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dfdfdfadf"
+        android:textSize="@dimen/px60"/>
 </LinearLayout>
