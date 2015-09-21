@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.adapter.TestRecyclerViewAdapter;
+import com.nfky.yaoyijia.generic.Utils;
 import com.nfky.yaoyijia.views.refreshrecycler.PullCallBack;
 import com.nfky.yaoyijia.views.refreshrecycler.PullToLoadView;
 
@@ -76,7 +77,7 @@ public class PurchaseFragment extends BaseFragment {
                             isLoading = false;
                             handler.sendEmptyMessage(1);
                         } catch (InterruptedException ex) {
-
+                            Utils.debug(ex.toString());
                         }
                         super.run();
                     }

@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
 
 		MainActivityPageAdapter adapter = new MainActivityPageAdapter(getSupportFragmentManager());
 
-		List<Fragment> fragments = new ArrayList<Fragment>();
+		List<Fragment> fragments = new ArrayList<>();
 		homeFragment = new HomeFragment();
 		circleFragment = new CircleFragment();
 		purchaseFragment = new PurchaseFragment();
