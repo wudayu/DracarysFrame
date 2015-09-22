@@ -8,12 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.adapter.TestRecyclerViewAdapter;
 import com.nfky.yaoyijia.generic.Utils;
 import com.nfky.yaoyijia.views.refreshrecycler.PullCallBack;
 import com.nfky.yaoyijia.views.refreshrecycler.PullToLoadView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -30,6 +34,7 @@ public class PurchaseFragment extends BaseFragment {
     RecyclerView mRecyclerView;
 
     boolean isLoading = false;
+    TestRecyclerViewAdapter adapter;
 
     @Override
     protected View initContainer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +59,7 @@ public class PurchaseFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             ptlMain.setComplete();
+            isLoading = false;
         }
     };
     @Override
@@ -62,7 +68,9 @@ public class PurchaseFragment extends BaseFragment {
         ptlMain.setPullCallBack(new PullCallBack() {
             @Override
             public void onLoadMore() {
+                isLoading = true;
                 //加载更多处理
+                addData();
             }
 
             @Override
@@ -93,11 +101,12 @@ public class PurchaseFragment extends BaseFragment {
             @Override
             public boolean hasLoadedAllItems() {
                 //返回当前是否还有更多数据
-                return true;
+                return false;
             }
         });
     }
 
+    List<String> newData = new ArrayList<>();
     @Override
     protected void initData() {
         // improve performance if you know that changes in content
@@ -105,11 +114,48 @@ public class PurchaseFragment extends BaseFragment {
         // mRecyclerView.setHasFixedSize(true);
 
         // specify an adapter (see also next example)
-        mRecyclerView.setAdapter(new TestRecyclerViewAdapter(new String[40]));
+        adapter = new TestRecyclerViewAdapter(new ArrayList<String>());
+        mRecyclerView.setAdapter(adapter);
+        newData.clear();
+        for (int i = 0; i < 20; ++i) {
+            newData.add("David " + i);
+        }
+        adapter.addData(newData);
     }
 
     @Override
     protected void afterAllSet() {
         ptlMain.initLoad();
+    }
+
+    Handler loadMoreHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            adapter.addData(newData);
+            ptlMain.setComplete();
+            isLoading = false;
+        }
+    };
+    public void addData() {
+        newData.clear();
+        for (int i = 0; i < 20; ++i) {
+            newData.add("David " + i);
+        }
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                try {
+                    Thread.sleep(3000);
+                    loadMoreHandler.sendEmptyMessage(0);
+                } catch (InterruptedException ex) {
+                    // balabala
+                }
+            }
+        }.start();
     }
 }
