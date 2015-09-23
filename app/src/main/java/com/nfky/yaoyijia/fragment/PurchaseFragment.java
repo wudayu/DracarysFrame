@@ -50,8 +50,8 @@ public class PurchaseFragment extends BaseFragment {
         // 设定ll布局
         LinearLayoutManager manager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
-        ptlMain.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        ptlMain.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     Handler handler = new Handler() {
