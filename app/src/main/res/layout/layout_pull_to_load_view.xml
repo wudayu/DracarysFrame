@@ -15,10 +15,11 @@
     </android.support.v4.widget.SwipeRefreshLayout>
     <ProgressBar
         android:id="@+id/progressBar"
+        android:layout_marginBottom="@dimen/ndp05"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"
+        android:visibility="visible"
         android:indeterminate="true"/>
 </FrameLayout>

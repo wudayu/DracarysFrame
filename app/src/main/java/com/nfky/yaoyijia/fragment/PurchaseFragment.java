@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.adapter.TestRecyclerViewAdapter;
@@ -18,6 +17,14 @@ import com.nfky.yaoyijia.views.refreshrecycler.PullToLoadView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -54,14 +61,6 @@ public class PurchaseFragment extends BaseFragment {
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            ptlMain.setComplete();
-            isLoading = false;
-        }
-    };
     @Override
     protected void initEvents() {
         //添加监听
@@ -77,19 +76,7 @@ public class PurchaseFragment extends BaseFragment {
             public void onRefresh() {
                 //刷新处理
                 isLoading = true;
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
-                            isLoading = false;
-                            handler.sendEmptyMessage(1);
-                        } catch (InterruptedException ex) {
-                            Utils.debug(ex.toString());
-                        }
-                        super.run();
-                    }
-                }.start();
+                loadingData();
             }
 
             @Override
@@ -109,11 +96,6 @@ public class PurchaseFragment extends BaseFragment {
     List<String> newData = new ArrayList<>();
     @Override
     protected void initData() {
-        // improve performance if you know that changes in content
-        // do not change the size of the RecyclerView
-        // mRecyclerView.setHasFixedSize(true);
-
-        // specify an adapter (see also next example)
         adapter = new TestRecyclerViewAdapter(new ArrayList<String>());
         mRecyclerView.setAdapter(adapter);
         newData.clear();
@@ -158,4 +140,85 @@ public class PurchaseFragment extends BaseFragment {
             }
         }.start();
     }
+
+    /**
+     * 以下代码用来测试RxJava
+     */
+    private Subscription _subscription; // 订阅对象
+
+    /**
+     * 当Activity销毁时，注销订阅对象
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (_subscription != null) {
+            _subscription.unsubscribe();
+        }
+    }
+
+    /**
+     * 加载代码，给订阅对象设置耗时任务以及监听器
+     */
+    private void loadingData() {
+        _subscription = AppObservable.bindSupportFragment(PurchaseFragment.this, _getObservable(1, 2, 3))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(_getObserver());
+    }
+
+    /**
+     * 耗时任务（Observable）定义
+     * just后接参数可多次当作Func1的第一个参数，多个just参数会按顺序执行Func1中的call
+     * 但就速度来说第一个参数所执行的onNext顺序在第二个参数开始执行之后
+     * 具体请参考执行结果
+     *
+     * @return 耗时任务 Observable
+     */
+    private Observable<String> _getObservable(int firstArg, int secondArg, int thirdArg) {
+        return Observable.just(firstArg, secondArg, thirdArg).map(new Func1<Integer, String>() {
+            @Override
+            public String call(Integer d) {
+                try {
+
+                    Utils.debug("Integer d = " + d);
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    // balabala
+                }
+
+                return "success " + d;
+            }
+        });
+
+    }
+
+    /**
+     * 设置监听器
+     *
+     * @return 监听器
+     */
+    private Observer<String> _getObserver() {
+        return new Observer<String>() {
+            @Override
+            public void onCompleted() {
+                Utils.debug("onCompleted");
+                isLoading = false;
+                ptlMain.setComplete();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Utils.debug("onError");
+                isLoading = false;
+                ptlMain.setComplete();
+            }
+
+            @Override
+            public void onNext(String s) {
+                Utils.debug("onNext Str = " + s);
+            }
+        };
+    }
+
 }
