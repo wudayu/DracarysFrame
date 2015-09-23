@@ -32,7 +32,8 @@ import rx.schedulers.Schedulers;
  * Created by David on 8/25/15.
  *
  * Description: 第三个Fragment
- *
+ * 准备抽象整个RxJava的访问方式，将所有的subscription放在Base的集合中，在Destroy里依次注销。
+ * 开启的线程方法放入Base中
  **/
 
 public class PurchaseFragment extends BaseFragment {
