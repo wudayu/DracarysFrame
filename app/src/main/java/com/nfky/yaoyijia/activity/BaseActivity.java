@@ -14,6 +14,17 @@ import com.nfky.yaoyijia.constant.BroadcastActions;
 import com.nfky.yaoyijia.generic.Utils;
 import com.nfky.yaoyijia.views.ProcessingDialog;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
 /**
  *
  * Created by David on 8/24/15.
@@ -30,6 +41,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected ProcessingDialog processingDialog = null;
     // 已保存实例状态
 	protected Bundle savedInstanceState = null;
+	// 线程管理Subscription池
+	List<Subscription> subscriptions = new ArrayList<>();
 
 	/** 初始化界面容器 */
 	protected abstract void initContainer();
@@ -72,6 +85,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     /**
      * 注销 关闭所有Activity 广播
+	 * 注销所有Subscription的任务
      */
 	@Override
 	protected void onDestroy() {
@@ -79,6 +93,11 @@ public abstract class BaseActivity extends FragmentActivity {
 			LocalBroadcastManager.getInstance(mContext).unregisterReceiver(finishReceiver);
 		} catch (Exception e) {
 			Utils.debug("BaseActivity : " + e.toString());
+		}
+
+		for (Subscription sub : subscriptions) {
+			if (sub != null)
+				sub.unsubscribe();
 		}
 
 		super.onDestroy();
@@ -125,5 +144,35 @@ public abstract class BaseActivity extends FragmentActivity {
 	public void finishThis(View view) {
 		this.finish();
 	}
+
+    /**
+     * 创建能够自释放的响应式线程
+     *
+     * @param threadTag 此响应式线程的String名称，用于打印或标记
+     * @param func 耗时任务的定义
+     * @param observer 监听者，耗时任务完成后执行监听者的方法
+     */
+    protected void createRxThread(String threadTag, Func1<String, Object> func, Observer<Object> observer) {
+        Subscription sub = AppObservable.bindActivity(BaseActivity.this, _getObservable(threadTag, func))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+
+        subscriptions.add(sub);
+    }
+
+    /**
+     * 初始化Observable耗时任务对象，执行外部Func1
+     * just后接参数可多次当作Func1的第一个参数，多个just参数会按顺序执行Func1中的call
+     * 但就速度来说第一个参数所执行的onNext顺序在第二个参数开始执行之后
+     * 具体请参考执行结果
+     *
+     * @param threadTag 响应式线程String类型Tag
+     * @param func 外部Func1
+     * @return 自定义对象
+     */
+    private Observable<Object> _getObservable(String threadTag, Func1<String, Object> func) {
+        return Observable.just(threadTag).map(func);
+    }
 
 }

@@ -9,7 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nfky.yaoyijia.activity.BaseActivity;
-import com.nfky.yaoyijia.views.ProcessingDialog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  *
@@ -22,6 +32,8 @@ import com.nfky.yaoyijia.views.ProcessingDialog;
 public abstract class BaseFragment extends Fragment {
 
 	protected Context mContext = null;
+	// 线程管理Subscription池
+	List<Subscription> subscriptions = new ArrayList<>();
 
     /** 初始化界面容器 */
 	protected abstract View initContainer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
@@ -81,5 +93,48 @@ public abstract class BaseFragment extends Fragment {
 	protected void dismissProcessingDialog() {
 		((BaseActivity) this.getActivity()).dismissProcessingDialog();
 	}
+
+    /**
+     * 注销所有Subscription的任务
+     */
+    @Override
+    public void onDestroy() {
+        for (Subscription sub : subscriptions) {
+            if (sub != null)
+                sub.unsubscribe();
+        }
+
+        super.onDestroy();
+    }
+
+    /**
+     * 创建能够自释放的响应式线程
+     *
+     * @param threadTag 此响应式线程的String名称，用于打印或标记
+     * @param func 耗时任务的定义
+     * @param observer 监听者，耗时任务完成后执行监听者的方法
+     */
+    protected void createRxThread(String threadTag, Func1<String, Object> func, Observer<Object> observer) {
+        Subscription sub = AppObservable.bindSupportFragment(BaseFragment.this, _getObservable(threadTag, func))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+
+        subscriptions.add(sub);
+    }
+
+    /**
+     * 初始化Observable耗时任务对象，执行外部Func1
+     * just后接参数可多次当作Func1的第一个参数，多个just参数会按顺序执行Func1中的call
+     * 但就速度来说第一个参数所执行的onNext顺序在第二个参数开始执行之后
+     * 具体请参考执行结果
+     *
+     * @param threadTag 响应式线程String类型Tag
+     * @param func 外部Func1
+     * @return 自定义对象
+     */
+    private Observable<Object> _getObservable(String threadTag, Func1<String, Object> func) {
+        return Observable.just(threadTag).map(func);
+    }
 
 }
