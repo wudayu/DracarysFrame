@@ -1,16 +1,12 @@
 package com.nfky.yaoyijia;
 
 import android.app.Application;
-import android.provider.SyncStateContract;
 
 import com.nfky.yaoyijia.constant.Constant;
 import com.nfky.yaoyijia.handler.CrashHandler;
-import com.nfky.yaoyijia.model.VcControlBlock;
 import com.nostra13.universalimageloader.utils.L;
 import com.nfky.yaoyijia.image.IImageHandler;
 import com.nfky.yaoyijia.image.UILImageHandler;
-
-import java.util.List;
 
 /**
  *
