@@ -5,9 +5,12 @@ import android.provider.SyncStateContract;
 
 import com.nfky.yaoyijia.constant.Constant;
 import com.nfky.yaoyijia.handler.CrashHandler;
+import com.nfky.yaoyijia.model.VcControlBlock;
 import com.nostra13.universalimageloader.utils.L;
 import com.nfky.yaoyijia.image.IImageHandler;
 import com.nfky.yaoyijia.image.UILImageHandler;
+
+import java.util.List;
 
 /**
  *
@@ -20,7 +23,7 @@ import com.nfky.yaoyijia.image.UILImageHandler;
 public class MainApp extends Application {
 
 	IImageHandler imageHandler = null;
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

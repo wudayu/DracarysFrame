@@ -1,5 +1,6 @@
 package com.nfky.yaoyijia.activity;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.nfky.yaoyijia.image.UILImageHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observer;
+import rx.functions.Func1;
 
 /**
  * Created by David on 8/27/15.
@@ -61,6 +65,31 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 showProcessingDialog(null, true, null);
+                createRxThread("testLogin", new Func1<String, Object>() {
+                    @Override
+                    public Object call(String s) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            // balabala
+                        }
+
+                        return tvName.getText().toString();
+                    }
+                }, new Observer<Object>() {
+                    @Override
+                    public void onCompleted() {
+                        startActivity(new Intent(LoginActivity.this, UserInterfaceActivity.class));
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        // balabala
+                    }
+                    @Override
+                    public void onNext(Object o) {
+                        dismissProcessingDialog();
+                    }
+                });
             }
         });
     }

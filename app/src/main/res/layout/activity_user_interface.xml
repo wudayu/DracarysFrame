@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/edt_test01"
+        android:tag="edt_test01"
+        android:layout_width="match_parent"
+        android:background="@color/letter_grey_deep_11"
+        android:layout_height="@dimen/dp40" />
+    <EditText
+        android:id="@+id/edt_test02"
+        android:tag="edt_test02"
+        android:layout_width="match_parent"
+        android:background="@color/letter_grey_deep_14"
+        android:layout_height="@dimen/dp40" />
+</LinearLayout>
