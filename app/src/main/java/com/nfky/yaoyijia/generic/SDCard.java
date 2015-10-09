@@ -20,8 +20,7 @@ public class SDCard implements ISDCard {
 
 	private SDCard() {}
 
-    public static ISDCard getInstance()
-    {
+    public static ISDCard getInstance() {
         if (instance == null) {
             synchronized (SDCard.class) {
                 if (instance == null) {
