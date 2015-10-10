@@ -1,9 +1,9 @@
-package com.nfky.yaoyijia.generic;
+package com.nfky.yaoyijia.handler;
 
 import android.os.Environment;
 import android.os.StatFs;
 
-import com.nfky.yaoyijia.generic.interfaces.ISDCard;
+import com.nfky.yaoyijia.generic.Utils;
 
 /**
  *
@@ -13,18 +13,18 @@ import com.nfky.yaoyijia.generic.interfaces.ISDCard;
  *
  **/
 
-public class SDCard implements ISDCard {
+public class SDCardHandler implements ISDCardHandler {
 
 	/** Generate Singleton */
-	private static volatile SDCard instance;
+	private static volatile SDCardHandler instance;
 
-	private SDCard() {}
+	private SDCardHandler() {}
 
-    public static ISDCard getInstance() {
+    public static ISDCardHandler getInstance() {
         if (instance == null) {
-            synchronized (SDCard.class) {
+            synchronized (SDCardHandler.class) {
                 if (instance == null) {
-                    instance = new SDCard();
+                    instance = new SDCardHandler();
                 }
             }
         }

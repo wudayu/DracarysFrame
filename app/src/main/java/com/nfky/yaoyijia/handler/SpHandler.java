@@ -1,37 +1,35 @@
-package com.nfky.yaoyijia.generic;
+package com.nfky.yaoyijia.handler;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.nfky.yaoyijia.generic.interfaces.ISP;
-
 /**
  * Created by David on 9/18/15.
  *
- * SpUtils 是ISP的实现类，是用于简化SharedPreference操作的类，相关会使用到的键需要写在ISP中
+ * SpHandler 是ISP的实现类，是用于简化SharedPreference操作的类，相关会使用到的键需要写在ISP中
  */
-public class SpUtils implements ISP {
+public class SpHandler implements ISpHandler {
 
     private static SharedPreferences sp;
     private static String defaultFileName;
 
     /** Generate the Singleton */
-    private SpUtils() {}
+    private SpHandler() {}
 
-    public static SpUtils getInstance(Context context) {
+    public static SpHandler getInstance(Context context) {
         if (sp == null) {
             sp = PreferenceManager.getDefaultSharedPreferences(context);
         }
-        return new SpUtils();
+        return new SpHandler();
     }
 
-    public static SpUtils getInstance(Context context, String fileName) {
+    public static SpHandler getInstance(Context context, String fileName) {
         if (defaultFileName == null || !defaultFileName.trim().equals(fileName)) {
             defaultFileName = fileName;
             sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         }
-        return new SpUtils();
+        return new SpHandler();
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.nfky.yaoyijia.image;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -44,9 +43,9 @@ import com.nfky.yaoyijia.constant.Constant;
 import com.nfky.yaoyijia.constant.ImageLoaderHelper;
 import com.nfky.yaoyijia.constant.ReqCode;
 import com.nfky.yaoyijia.generic.DensityUtils;
-import com.nfky.yaoyijia.generic.SDCard;
+import com.nfky.yaoyijia.handler.SDCardHandler;
 import com.nfky.yaoyijia.generic.Utils;
-import com.nfky.yaoyijia.generic.interfaces.ISDCard;
+import com.nfky.yaoyijia.handler.ISDCardHandler;
 import com.nfky.yaoyijia.handler.FileHandler;
 import com.nfky.yaoyijia.handler.IFileHandler;
 import com.nfky.yaoyijia.handler.IFileHandler.CacheDir;
@@ -64,7 +63,7 @@ import com.nfky.yaoyijia.views.SelectPicPopupWindow;
 public class UILImageHandler implements IImageHandler {
 
 	private static Context sContext = null;
-	private static ISDCard sSDCard = null;
+	private static ISDCardHandler sSDCard = null;
 	private static IFileHandler sFileHandler = null;
 
 	ImageLoader imageLoader = null;
@@ -83,7 +82,7 @@ public class UILImageHandler implements IImageHandler {
 
     public static IImageHandler getInstance(Context context) {
         sContext = context;
-        sSDCard = SDCard.getInstance();
+        sSDCard = SDCardHandler.getInstance();
         sFileHandler = FileHandler.getInstance(context);
 
         if (instance == null) {
@@ -192,7 +191,7 @@ public class UILImageHandler implements IImageHandler {
         .memoryCache(new WeakMemoryCache()) // default new LruMemoryCache(2 * 1024 * 1024)
         .memoryCacheSize(4 * 1024 * 1024) // default 2 * 1024 * 1024
         // .memoryCacheSizePercentage(13) // default
-        .diskCache(new UnlimitedDiscCache(new File(ISDCard.SD_IMAGE_CACHE))) // default
+        .diskCache(new UnlimitedDiscCache(new File(ISDCardHandler.SD_IMAGE_CACHE))) // default
         // .diskCacheExtraOptions(maxImageWidthForDiskCache, maxImageHeightForDiskCache, processorForDiskCache)
         .diskCacheSize(128 * 1024 * 1024)
         // .diskCacheFileCount(100)
