@@ -125,7 +125,7 @@ public class LogHandler implements ILogHandler {
      * @param message 写入日志文件的信息
      */
     public synchronized void output(String fileName, String message) {
-        File file = new File(instance.cachePath, fileName);
+        File file = new File(cachePath, fileName);
         FileOutputStream fos = null;
         DataOutputStream dos = null;
         try {

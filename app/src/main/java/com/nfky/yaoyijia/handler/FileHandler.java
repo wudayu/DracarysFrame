@@ -101,14 +101,14 @@ public class FileHandler implements IFileHandler {
 	public String getFileDir() {
 		if (Environment.getExternalStorageState().equals(
 				Environment.MEDIA_MOUNTED)) {
-			File file = instance.context.getExternalFilesDir(null);
+			File file = context.getExternalFilesDir(null);
 
 			if (file != null) {
 				return file.getAbsolutePath();
 			}
 		}
 
-		return instance.context.getFilesDir().getAbsolutePath();
+		return context.getFilesDir().getAbsolutePath();
 	}
 
 	/**
@@ -120,14 +120,14 @@ public class FileHandler implements IFileHandler {
 	public String getCacheDir() {
 		if (Environment.getExternalStorageState().equals(
 				Environment.MEDIA_MOUNTED)) {
-			File file = instance.context.getExternalCacheDir();
+			File file = context.getExternalCacheDir();
 
 			if (file != null) {
 				return file.getAbsolutePath();
 			}
 		}
 
-		return instance.context.getCacheDir().getAbsolutePath();
+		return context.getCacheDir().getAbsolutePath();
 	}
 
 	/**
@@ -737,7 +737,7 @@ public class FileHandler implements IFileHandler {
 	public String getStringFromAssets(String fileName) {
 		String result = "";
 		try {
-			InputStream in = instance.context.getAssets().open(fileName);
+			InputStream in = context.getAssets().open(fileName);
 			// 获取文件的字节数
 			int length = in.available();
 			// 创建byte数组

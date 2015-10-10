@@ -56,9 +56,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        if (!handleException(ex) && instance.defaultHandler != null) {
+        if (!handleException(ex) && defaultHandler != null) {
             //如果用户没有处理则让系统默认的异常处理器来处理
-            instance.defaultHandler.uncaughtException(thread, ex);
+            defaultHandler.uncaughtException(thread, ex);
         } else {
             try {
                 Thread.sleep(1000);
@@ -86,13 +86,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(instance.context, instance.context.getText(R.string.error_got_uncaught_exception), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, context.getText(R.string.error_got_uncaught_exception), Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }.start();
 
         //写入日志文件
-        instance.logHandler.writeLogApp(getDeviceInfo() + getExceptionInfo(ex));
+        logHandler.writeLogApp(getDeviceInfo() + getExceptionInfo(ex));
 
         return true;
     }
@@ -104,7 +104,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     public String getDeviceInfo() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, String> entry : Utils.getDeviceInfo(instance.context).entrySet()) {
+        for (Map.Entry<String, String> entry : Utils.getDeviceInfo(context).entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             sb.append(key + "=" + value + "\n");

@@ -71,7 +71,7 @@ public class DataHandler implements IDataHandler {
 			}
 		};
         // TODO edit this function
-//		instance.netHandler.getForUserInfo(userId, cbRetrofit);
+//		netHandler.getForUserInfo(userId, cbRetrofit);
 	}
 
 }
