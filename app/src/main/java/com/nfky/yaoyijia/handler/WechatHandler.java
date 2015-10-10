@@ -3,6 +3,7 @@ package com.nfky.yaoyijia.handler;
 import android.content.Context;
 
 import com.nfky.yaoyijia.constant.Constant;
+import com.nfky.yaoyijia.handler.interfaces.IWechatHandler;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;

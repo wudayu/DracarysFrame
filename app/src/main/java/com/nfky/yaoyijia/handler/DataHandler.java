@@ -7,6 +7,7 @@ import android.app.Activity;
 
 import com.nfky.yaoyijia.db.IDbHandler;
 import com.nfky.yaoyijia.db.OrmliteDbHandler;
+import com.nfky.yaoyijia.handler.interfaces.IDataHandler;
 import com.nfky.yaoyijia.model.VcUser;
 import com.nfky.yaoyijia.net.INetHandler;
 import com.nfky.yaoyijia.net.RetrofitNetHandler;

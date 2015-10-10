@@ -1,13 +1,11 @@
 package com.nfky.yaoyijia.handler;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.util.Log;
 
 import com.nfky.yaoyijia.constant.Constant;
 import com.nfky.yaoyijia.generic.Utils;
+import com.nfky.yaoyijia.handler.interfaces.IFileHandler;
+import com.nfky.yaoyijia.handler.interfaces.ILogHandler;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -15,12 +13,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created by David on 9/11/15.

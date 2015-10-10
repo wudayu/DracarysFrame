@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.generic.Utils;
+import com.nfky.yaoyijia.handler.interfaces.ILogHandler;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

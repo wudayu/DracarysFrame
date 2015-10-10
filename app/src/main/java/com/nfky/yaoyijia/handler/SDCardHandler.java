@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.os.StatFs;
 
 import com.nfky.yaoyijia.generic.Utils;
+import com.nfky.yaoyijia.handler.interfaces.ISDCardHandler;
 
 /**
  *

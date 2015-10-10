@@ -1,6 +1,6 @@
 package com.nfky.yaoyijia.db;
 
-import com.nfky.yaoyijia.handler.IDataHandler;
+import com.nfky.yaoyijia.handler.interfaces.IDataHandler;
 import com.nfky.yaoyijia.model.VcUser;
 
 /**

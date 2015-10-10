@@ -1,4 +1,4 @@
-package com.nfky.yaoyijia.handler;
+package com.nfky.yaoyijia.handler.interfaces;
 
 /**
  *

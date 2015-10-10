@@ -23,6 +23,7 @@ import android.os.Environment;
 
 import com.nfky.yaoyijia.constant.Constant;
 import com.nfky.yaoyijia.generic.Utils;
+import com.nfky.yaoyijia.handler.interfaces.IFileHandler;
 
 /**
  * Created by David on 8/26/15.

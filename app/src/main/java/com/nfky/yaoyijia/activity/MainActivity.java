@@ -15,7 +15,7 @@ import com.nfky.yaoyijia.fragment.CircleFragment;
 import com.nfky.yaoyijia.fragment.MineFragment;
 import com.nfky.yaoyijia.fragment.PurchaseFragment;
 import com.nfky.yaoyijia.generic.Utils;
-import com.nfky.yaoyijia.handler.ILogHandler;
+import com.nfky.yaoyijia.handler.interfaces.ILogHandler;
 import com.nfky.yaoyijia.handler.LogHandler;
 import com.nfky.yaoyijia.service.PushService;
 import com.nfky.yaoyijia.views.PageSelectBar;

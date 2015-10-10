@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.nfky.yaoyijia.handler.interfaces.ISpHandler;
+
 /**
  * Created by David on 9/18/15.
  *
