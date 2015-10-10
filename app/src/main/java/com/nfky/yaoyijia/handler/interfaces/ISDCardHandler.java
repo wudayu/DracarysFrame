@@ -10,21 +10,21 @@ import android.os.Environment;
  *
  **/
 
-public interface ISDCardHandler {
+public interface ISdCardHandler {
 
-	String SD_CARD = Environment.getExternalStorageDirectory().getAbsolutePath();
+    String SD_CARD = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-	// SDCard中的应用主目录
-	String SD_CARD_APP = SD_CARD + "/yyj";
+    // SDCard中的应用主目录
+    String SD_CARD_APP = SD_CARD + "/yyj";
     // 下载文件目录
-	String SD_DOWNLOAD = SD_CARD_APP + "/download/";
+    String SD_DOWNLOAD = SD_CARD_APP + "/download/";
     // 额外日志目录，并非LogHandler使用的目录
-	String SD_LOG = SD_CARD_APP + "/log/";
+    String SD_LOG = SD_CARD_APP + "/log/";
     // 额外图片目录，并非ImageLoader使用的目录
-	String SD_IMAGE_CACHE = SD_CARD_APP + "/image/cache/";
+    String SD_IMAGE_CACHE = SD_CARD_APP + "/image/cache/";
 
-	boolean isSdcardAvaliable();
+    boolean isSdcardAvailable();
 
-	boolean isAvaiableSpace(long size);
+    boolean isAvailableSpace(long size);
 
 }

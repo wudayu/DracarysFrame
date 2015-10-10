@@ -20,16 +20,14 @@ import com.nfky.yaoyijia.model.VcUser;
  **/
 public class OrmliteDbHandler implements IDbHandler {
 
-	private static Context sContext = null;
+	private Context context = null;
 
 	/** Generate the Singleton */
-	private static volatile IDbHandler instance;
+	private static volatile OrmliteDbHandler instance;
 
 	private OrmliteDbHandler() {}
 
     public static IDbHandler getInstance(Context context) {
-        sContext = context;
-
         if (instance == null) {
             synchronized (OrmliteDbHandler.class) {
                 if (instance == null) {
@@ -37,6 +35,9 @@ public class OrmliteDbHandler implements IDbHandler {
                 }
             }
         }
+
+		instance.context = context;
+
         return instance;
     }
 
@@ -49,7 +50,7 @@ public class OrmliteDbHandler implements IDbHandler {
 	 */
 	private DatabaseHelper getHelper() {
 	    if (mDatabaseHelper == null) {
-	    	mDatabaseHelper = OpenHelperManager.getHelper(sContext, DatabaseHelper.class);
+	    	mDatabaseHelper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
 	    }
 
 	    return mDatabaseHelper;
@@ -70,10 +71,10 @@ public class OrmliteDbHandler implements IDbHandler {
 			if (users != null && users.size() > 0) {
 				dcb.onSuccess(users.get(0));
 			} else {
-				dcb.onFailure(sContext.getString(R.string.error_local_database_has_no_data), null);
+				dcb.onFailure(context.getString(R.string.error_local_database_has_no_data), null);
 			}
 		} catch (SQLException e) {
-			dcb.onFailure(sContext.getString(R.string.error_local_database_connot_be_connected), null);
+			dcb.onFailure(context.getString(R.string.error_local_database_connot_be_connected), null);
 			e.printStackTrace();
 		}
 	}

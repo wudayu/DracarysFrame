@@ -43,9 +43,9 @@ import com.nfky.yaoyijia.constant.Constant;
 import com.nfky.yaoyijia.constant.ImageLoaderHelper;
 import com.nfky.yaoyijia.constant.ReqCode;
 import com.nfky.yaoyijia.generic.DensityUtils;
-import com.nfky.yaoyijia.handler.SDCardHandler;
+import com.nfky.yaoyijia.handler.SdCardHandler;
 import com.nfky.yaoyijia.generic.Utils;
-import com.nfky.yaoyijia.handler.interfaces.ISDCardHandler;
+import com.nfky.yaoyijia.handler.interfaces.ISdCardHandler;
 import com.nfky.yaoyijia.handler.FileHandler;
 import com.nfky.yaoyijia.handler.interfaces.IFileHandler;
 import com.nfky.yaoyijia.handler.interfaces.IFileHandler.CacheDir;
@@ -62,9 +62,9 @@ import com.nfky.yaoyijia.views.SelectPicPopupWindow;
 
 public class UILImageHandler implements IImageHandler {
 
-	private static Context sContext = null;
-	private static ISDCardHandler sSDCard = null;
-	private static IFileHandler sFileHandler = null;
+	private Context context = null;
+	private ISdCardHandler sdCard = null;
+	private IFileHandler fileHandler = null;
 
 	ImageLoader imageLoader = null;
 	ImageLoaderConfiguration defaultUilLoader = null;
@@ -76,15 +76,11 @@ public class UILImageHandler implements IImageHandler {
 	String mImageCacheDir = null;
 
 	/** Generate Singleton */
-	private static volatile IImageHandler instance;
+	private static volatile UILImageHandler instance;
 
 	private UILImageHandler() {}
 
     public static IImageHandler getInstance(Context context) {
-        sContext = context;
-        sSDCard = SDCardHandler.getInstance();
-        sFileHandler = FileHandler.getInstance(context);
-
         if (instance == null) {
             synchronized (UILImageHandler.class) {
                 if (instance == null) {
@@ -92,6 +88,10 @@ public class UILImageHandler implements IImageHandler {
                 }
             }
         }
+
+		instance.context = context;
+		instance.sdCard = SdCardHandler.getInstance();
+		instance.fileHandler = FileHandler.getInstance(context);
 
         return instance;
     }
@@ -108,7 +108,7 @@ public class UILImageHandler implements IImageHandler {
 		if (!imageLoader.isInited())
 			imageLoader.init(defaultUilLoader);
 
-		mImageCacheDir = sFileHandler.getCacheDirByType(CacheDir.IMAGE);
+		mImageCacheDir = fileHandler.getCacheDirByType(CacheDir.IMAGE);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class UILImageHandler implements IImageHandler {
 	 */
 	@Override
 	public void cleanImageCache(long size, long millSecAgo) {
-		sFileHandler.cleanCache(mImageCacheDir, size, millSecAgo);
+		fileHandler.cleanCache(mImageCacheDir, size, millSecAgo);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class UILImageHandler implements IImageHandler {
 		        .considerExifParams(true)
 		        .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
 		        .bitmapConfig(Bitmap.Config.RGB_565)
-		        .displayer(new RoundedBitmapDisplayer(sContext.getResources().getDimensionPixelSize(R.dimen.round_corner_small)))
+		        .displayer(new RoundedBitmapDisplayer(context.getResources().getDimensionPixelSize(R.dimen.round_corner_small)))
 		        .build();
 
 		// 头像图片的Display，用于加载圆形的图片
@@ -175,12 +175,12 @@ public class UILImageHandler implements IImageHandler {
 		        .considerExifParams(true)
 		        .imageScaleType(ImageScaleType.EXACTLY)
 		        .bitmapConfig(Bitmap.Config.ARGB_8888)
-		        .displayer(new RoundedBitmapDisplayer(sContext.getResources().getDimensionPixelSize(R.dimen.round_corner_circle)))
+		        .displayer(new RoundedBitmapDisplayer(context.getResources().getDimensionPixelSize(R.dimen.round_corner_circle)))
 		        .build();
 
 		// 默认的Loader
-		defaultUilLoader = new ImageLoaderConfiguration.Builder(sContext)
-		.memoryCacheExtraOptions(DensityUtils.getScreenWidth(sContext), DensityUtils.getScreenHeight(sContext)) // default = device screen dimensions
+		defaultUilLoader = new ImageLoaderConfiguration.Builder(context)
+		.memoryCacheExtraOptions(DensityUtils.getScreenWidth(context), DensityUtils.getScreenHeight(context)) // default = device screen dimensions
         // .diskCacheExtraOptions(480, 800, null)
         // .taskExecutor(...)
         // .taskExecutorForCachedImages(...)
@@ -191,12 +191,12 @@ public class UILImageHandler implements IImageHandler {
         .memoryCache(new WeakMemoryCache()) // default new LruMemoryCache(2 * 1024 * 1024)
         .memoryCacheSize(4 * 1024 * 1024) // default 2 * 1024 * 1024
         // .memoryCacheSizePercentage(13) // default
-        .diskCache(new UnlimitedDiscCache(new File(ISDCardHandler.SD_IMAGE_CACHE))) // default
+        .diskCache(new UnlimitedDiscCache(new File(ISdCardHandler.SD_IMAGE_CACHE))) // default
         // .diskCacheExtraOptions(maxImageWidthForDiskCache, maxImageHeightForDiskCache, processorForDiskCache)
         .diskCacheSize(128 * 1024 * 1024)
         // .diskCacheFileCount(100)
         .diskCacheFileNameGenerator(new Md5FileNameGenerator()) // default HashCodeFileNameGenerator
-        .imageDownloader(new ImageDownloaderWithAccessToken(sContext)) // default
+        .imageDownloader(new ImageDownloaderWithAccessToken(context)) // default
         // .imageDecoder(new BaseImageDecoder()) // default
         .defaultDisplayImageOptions(defaultUilDisplay) // default
         // .writeDebugLogs()
@@ -298,9 +298,9 @@ public class UILImageHandler implements IImageHandler {
 	 */
 	private void loadImage(String uri, ImageView imageView, DisplayImageOptions options, ImageLoadingListener outsideLoadingListener, ImageLoadingProgressListener progressListener) {
 		// use image cache
-		String fileName = sFileHandler.getFileNameInUrl(uri);
+		String fileName = fileHandler.getFileNameInUrl(uri);
 		String fullPath = mImageCacheDir + fileName;
-		if (sFileHandler.isFileExists(fullPath)) {
+		if (fileHandler.isFileExists(fullPath)) {
 			imageLoader.displayImage(ImageLoaderHelper.URI_PREFIX_FILE + fullPath, imageView, options, outsideLoadingListener, progressListener);
 		} else {
 			imageLoader.displayImage(uri, imageView, options, new SaveCacheImageLoadingListener(fullPath, outsideLoadingListener), progressListener);
@@ -354,7 +354,7 @@ public class UILImageHandler implements IImageHandler {
 		 */
 		@Override
 		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-			sFileHandler.saveBitmap(fullPath, loadedImage, CompressFormat.PNG);
+			fileHandler.saveBitmap(fullPath, loadedImage, CompressFormat.PNG);
 
 			if (outsideLoadingListener != null)
 				outsideLoadingListener.onLoadingComplete(imageUri, view, loadedImage);
@@ -520,9 +520,9 @@ public class UILImageHandler implements IImageHandler {
 	 */
 	@Override
 	public Bitmap getBitmapFromCachedFile(String url, int defRes) {
-		String path = sFileHandler.getCacheDirByType(IFileHandler.CacheDir.IMAGE) + sFileHandler.getFileNameInUrl(url);
-		if (!sFileHandler.isFileExists(path)) {
-			return BitmapFactory.decodeResource(sContext.getResources(), defRes);
+		String path = fileHandler.getCacheDirByType(IFileHandler.CacheDir.IMAGE) + fileHandler.getFileNameInUrl(url);
+		if (!fileHandler.isFileExists(path)) {
+			return BitmapFactory.decodeResource(context.getResources(), defRes);
 		}
 		return BitmapFactory.decodeFile(path);
 	}
@@ -671,7 +671,7 @@ public class UILImageHandler implements IImageHandler {
 	 */
 	private boolean saveBitmap(File file, Bitmap bitmap, int quality,
 			CompressFormat format) {
-		if (sSDCard.isSdcardAvaliable()) {
+		if (sdCard.isSdcardAvailable()) {
 			try {
 				FileOutputStream out = new FileOutputStream(file);
 
@@ -684,7 +684,7 @@ public class UILImageHandler implements IImageHandler {
 				Utils.debug(e.toString());
 			}
 		} else {
-			Utils.debug(sContext.getString(R.string.error_can_not_find_sdcard));
+			Utils.debug(context.getString(R.string.error_can_not_find_sdcard));
 		}
 
 		return false;
@@ -737,7 +737,7 @@ public class UILImageHandler implements IImageHandler {
 					// 跳转相机拍照
 					String sdStatus = Environment.getExternalStorageState();
 					if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
-						Utils.toastMessage(activity, sContext.getString(R.string.error_can_not_find_sdcard));
+						Utils.toastMessage(activity, context.getString(R.string.error_can_not_find_sdcard));
 						return;
 					}
 					Intent intentTakenPic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
