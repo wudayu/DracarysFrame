@@ -21,22 +21,18 @@ import java.util.Map;
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
-    private static Context sContext = null;
-    private static ILogHandler sLogHandler = null;
+    private Context context = null;
+    private ILogHandler logHandler = null;
     //系统默认的UncaughtExceptionHandler
-    private static Thread.UncaughtExceptionHandler sDefaultHandler = null;
+    private Thread.UncaughtExceptionHandler defaultHandler = null;
 
 
     /** Generate Singleton */
-    private static volatile Thread.UncaughtExceptionHandler instance;
+    private static volatile CrashHandler instance;
 
     private CrashHandler() {}
 
     public static Thread.UncaughtExceptionHandler getInstance(Context context) {
-        sContext = context;
-        sLogHandler = LogHandler.getInstance(sContext);
-        sDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-
         if (instance == null) {
             synchronized (CrashHandler.class) {
                 if (instance == null) {
@@ -46,6 +42,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 }
             }
         }
+
+        instance.context = context;
+        instance.logHandler = LogHandler.getInstance(instance.context);
+        instance.defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
         return instance;
     }
 
@@ -55,9 +56,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        if (!handleException(ex) && sDefaultHandler != null) {
+        if (!handleException(ex) && instance.defaultHandler != null) {
             //如果用户没有处理则让系统默认的异常处理器来处理
-            sDefaultHandler.uncaughtException(thread, ex);
+            instance.defaultHandler.uncaughtException(thread, ex);
         } else {
             try {
                 Thread.sleep(1000);
@@ -85,13 +86,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(sContext, sContext.getText(R.string.error_got_uncaught_exception), Toast.LENGTH_LONG).show();
+                Toast.makeText(instance.context, instance.context.getText(R.string.error_got_uncaught_exception), Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }.start();
 
         //写入日志文件
-        sLogHandler.writeLogApp(getDeviceInfo() + getExceptionInfo(ex));
+        instance.logHandler.writeLogApp(getDeviceInfo() + getExceptionInfo(ex));
 
         return true;
     }
@@ -103,7 +104,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     public String getDeviceInfo() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, String> entry : Utils.getDeviceInfo(sContext).entrySet()) {
+        for (Map.Entry<String, String> entry : Utils.getDeviceInfo(instance.context).entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             sb.append(key + "=" + value + "\n");

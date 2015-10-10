@@ -10,28 +10,46 @@ import com.nfky.yaoyijia.handler.interfaces.ISpHandler;
  * Created by David on 9/18/15.
  *
  * SpHandler 是ISP的实现类，是用于简化SharedPreference操作的类，相关会使用到的键需要写在ISP中
+ * 由于SpHandler有两种状态，一种是获取默认Sp文件，一种是获取自定义文件，所以不能用纯粹的单例模式。
  */
 public class SpHandler implements ISpHandler {
 
-    private static SharedPreferences sp;
-    private static String defaultFileName;
+    private SharedPreferences sp;
+    private String defaultFileName;
 
     /** Generate the Singleton */
+    private static volatile SpHandler instance;
+
     private SpHandler() {}
 
-    public static SpHandler getInstance(Context context) {
-        if (sp == null) {
-            sp = PreferenceManager.getDefaultSharedPreferences(context);
+    public static ISpHandler getInstance(Context context) {
+        if (instance == null) {
+            synchronized (SpHandler.class) {
+                if (instance == null) {
+                    instance = new SpHandler();
+                }
+            }
         }
-        return new SpHandler();
+
+        if (instance.sp == null) {
+            instance.sp = PreferenceManager.getDefaultSharedPreferences(context);
+        }
+
+        return instance;
     }
 
-    public static SpHandler getInstance(Context context, String fileName) {
-        if (defaultFileName == null || !defaultFileName.trim().equals(fileName)) {
-            defaultFileName = fileName;
-            sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+    /**
+     * 若使用特定文件的Sp，为了防止与其他界面的Sp冲突，这里new一个新的SpHandler来记录新值
+     */
+    public static ISpHandler getInstance(Context context, String fileName) {
+        SpHandler spSpecificHandler = new SpHandler();
+
+        if (spSpecificHandler.defaultFileName == null || !spSpecificHandler.defaultFileName.trim().equals(fileName)) {
+            spSpecificHandler.defaultFileName = fileName;
+            spSpecificHandler.sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         }
-        return new SpHandler();
+
+        return spSpecificHandler;
     }
 
     @Override

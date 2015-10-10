@@ -18,16 +18,14 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class WechatHandler implements IWechatHandler {
 
+	private IWXAPI api = null;
+
 	/** Generate Singleton */
 	private static volatile WechatHandler instance;
-	private static IWXAPI api = null;
 
 	private WechatHandler() {}
 
     public static IWechatHandler getInstance(Context context) {
-        api = WXAPIFactory.createWXAPI(context, Constant.WX_APP_ID);
-        api.registerApp(Constant.WX_APP_ID);
-
         if (instance == null) {
             synchronized (WechatHandler.class) {
                 if (instance == null) {
@@ -35,6 +33,10 @@ public class WechatHandler implements IWechatHandler {
                 }
             }
         }
+
+		instance.api = WXAPIFactory.createWXAPI(context, Constant.WX_APP_ID);
+		instance.api.registerApp(Constant.WX_APP_ID);
+
         return instance;
     }
 
@@ -44,7 +46,7 @@ public class WechatHandler implements IWechatHandler {
 	 * @param appId appId
 	 * @param partnerId partnerId
 	 * @param prepayId prepayId
-	 * @param noncestr noncester
+	 * @param noncestr noncestr
 	 * @param timeStamp timeStamp
 	 * @param sign sign
 	 * @return true->成功调用微信

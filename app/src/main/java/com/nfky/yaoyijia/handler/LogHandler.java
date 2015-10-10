@@ -24,20 +24,16 @@ import java.util.Locale;
  */
 public class LogHandler implements ILogHandler {
 
-    private static Context sContext = null;
-    private static IFileHandler sFileHandler = null;
-    private static String sCachePath = null;
+    private Context context = null;
+    private IFileHandler fileHandler = null;
+    private String cachePath = null;
 
     /** Generate the Singleton */
-    private static volatile ILogHandler instance;
+    private static volatile LogHandler instance;
 
     private LogHandler() {}
 
     public static ILogHandler getInstance(Context context) {
-        sContext = context;
-        sFileHandler = FileHandler.getInstance(context);
-        sCachePath = sFileHandler.getCacheDirByType(IFileHandler.CacheDir.LOG);
-
         if (instance == null) {
             synchronized (LogHandler.class) {
                 if (instance == null) {
@@ -45,6 +41,11 @@ public class LogHandler implements ILogHandler {
                 }
             }
         }
+
+        instance.context = context;
+        instance.fileHandler = FileHandler.getInstance(context);
+        instance.cachePath = instance.fileHandler.getCacheDirByType(IFileHandler.CacheDir.LOG);
+
         return instance;
     }
 
@@ -57,7 +58,7 @@ public class LogHandler implements ILogHandler {
     @Override
     public String writeLogTag() {
         // 首先当Log文件夹大小超过15MB时，清理存在超过七天的日志
-        sFileHandler.cleanCache(sCachePath, LOG_MAX_VOLUME, LOG_DAY_LENGTH);
+        fileHandler.cleanCache(cachePath, LOG_MAX_VOLUME, LOG_DAY_LENGTH);
         // 生成log的内容
         StringBuilder log = new StringBuilder();
         try {
@@ -90,7 +91,7 @@ public class LogHandler implements ILogHandler {
     @Override
     public String writeLogApp(String extraInfo) {
         // 首先当Log文件夹大小超过15MB时，清理存在超过七天的日志
-        sFileHandler.cleanCache(sCachePath, LOG_MAX_VOLUME, LOG_DAY_LENGTH);
+        fileHandler.cleanCache(cachePath, LOG_MAX_VOLUME, LOG_DAY_LENGTH);
         // 生成log的内容
         StringBuilder log = new StringBuilder();
         try {
@@ -123,8 +124,8 @@ public class LogHandler implements ILogHandler {
      *
      * @param message 写入日志文件的信息
      */
-    public static synchronized void output(String fileName, String message) {
-        File file = new File(sCachePath, fileName);
+    public synchronized void output(String fileName, String message) {
+        File file = new File(instance.cachePath, fileName);
         FileOutputStream fos = null;
         DataOutputStream dos = null;
         try {

@@ -35,16 +35,14 @@ import com.nfky.yaoyijia.handler.interfaces.IFileHandler;
 public class FileHandler implements IFileHandler {
 
 	public static final String DEFAULT_ENCODING = "UTF-8";
-	private static Context sContext = null;
+	private Context context = null;
 
 	/** Generate Singleton */
-	private static volatile IFileHandler instance;
+	private static volatile FileHandler instance;
 
 	private FileHandler() {}
 
     public static IFileHandler getInstance(Context context) {
-        sContext = context;
-
         if (instance == null) {
             synchronized (FileHandler.class) {
                 if (instance == null) {
@@ -52,6 +50,9 @@ public class FileHandler implements IFileHandler {
                 }
             }
         }
+
+		instance.context = context;
+
         return instance;
     }
 
@@ -100,14 +101,14 @@ public class FileHandler implements IFileHandler {
 	public String getFileDir() {
 		if (Environment.getExternalStorageState().equals(
 				Environment.MEDIA_MOUNTED)) {
-			File file = sContext.getExternalFilesDir(null);
+			File file = instance.context.getExternalFilesDir(null);
 
 			if (file != null) {
 				return file.getAbsolutePath();
 			}
 		}
 
-		return sContext.getFilesDir().getAbsolutePath();
+		return instance.context.getFilesDir().getAbsolutePath();
 	}
 
 	/**
@@ -119,14 +120,14 @@ public class FileHandler implements IFileHandler {
 	public String getCacheDir() {
 		if (Environment.getExternalStorageState().equals(
 				Environment.MEDIA_MOUNTED)) {
-			File file = sContext.getExternalCacheDir();
+			File file = instance.context.getExternalCacheDir();
 
 			if (file != null) {
 				return file.getAbsolutePath();
 			}
 		}
 
-		return sContext.getCacheDir().getAbsolutePath();
+		return instance.context.getCacheDir().getAbsolutePath();
 	}
 
 	/**
@@ -736,7 +737,7 @@ public class FileHandler implements IFileHandler {
 	public String getStringFromAssets(String fileName) {
 		String result = "";
 		try {
-			InputStream in = sContext.getAssets().open(fileName);
+			InputStream in = instance.context.getAssets().open(fileName);
 			// 获取文件的字节数
 			int length = in.available();
 			// 创建byte数组

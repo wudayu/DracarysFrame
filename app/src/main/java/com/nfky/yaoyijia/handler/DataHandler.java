@@ -22,20 +22,16 @@ import com.nfky.yaoyijia.net.protocol.VcUserResult;
  **/
 public class DataHandler implements IDataHandler {
 
-	private static Activity sContext = null;
-	private static INetHandler sNetHandler = null;
-	private static IDbHandler sDbHandler = null;
+	private Activity context = null;
+	private INetHandler netHandler = null;
+	private IDbHandler dbHandler = null;
 
 	/** Generate the Singleton */
-	private static volatile IDataHandler instance;
+	private static volatile DataHandler instance;
 
 	private DataHandler() {}
 
     public static IDataHandler getInstance(Activity context) {
-        sContext = context;
-        sNetHandler = RetrofitNetHandler.getInstance();
-        sDbHandler = OrmliteDbHandler.getInstance(context);
-
         if (instance == null) {
             synchronized (DataHandler.class) {
                 if (instance == null) {
@@ -43,6 +39,11 @@ public class DataHandler implements IDataHandler {
                 }
             }
         }
+
+		instance.context = context;
+		instance.netHandler = RetrofitNetHandler.getInstance();
+		instance.dbHandler = OrmliteDbHandler.getInstance(context);
+
         return instance;
     }
 
@@ -57,20 +58,20 @@ public class DataHandler implements IDataHandler {
 		Callback<VcUserResult> cbRetrofit = new Callback<VcUserResult>() {
 			@Override
 			public void failure(RetrofitError error) {
-				RetrofitNetHandler.toastNetworkError(sContext, error);
+				RetrofitNetHandler.toastNetworkError(context, error);
 				// 网络无法连接，连接本地数据库
-				sDbHandler.getForUserInfo(userId, dcb);
+				dbHandler.getForUserInfo(userId, dcb);
 			}
 			@Override
 			public void success(VcUserResult result, Response response) {
 				// 获取到数据，首先写入数据库
 				VcUser user = result.getObjValue();
-				sDbHandler.setForUserInfo(user);
+				dbHandler.setForUserInfo(user);
 				dcb.onSuccess(user);
 			}
 		};
         // TODO edit this function
-//		sNetHandler.getForUserInfo(userId, cbRetrofit);
+//		instance.netHandler.getForUserInfo(userId, cbRetrofit);
 	}
 
 }
