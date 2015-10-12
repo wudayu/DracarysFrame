@@ -44,15 +44,6 @@ public class VcUser {
 	String brokerType;
 	@DatabaseField(columnName = SUPERIOR_ID)
 	String superiorId;
-	String city;
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	public String getId() {
 		return id;

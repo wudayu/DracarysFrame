@@ -1,9 +1,9 @@
 #
-# generated on 2015/03/04 06:02:32
+# generated on 2015/10/12 05:26:40
 #
 # --table-start--
-dataClass=com.nfky.yaoyijia.model.DafUser
-tableName=DafUser
+dataClass=com.nfky.yaoyijia.model.VcUser
+tableName=VcUser
 # --table-fields-start--
 # --field-start--
 fieldName=id

@@ -11,6 +11,12 @@ import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
  * 以上内容摘自官方文档。每当创建了一个新的本地数据库model后，需要运行此文件的main函数
  **/
 public class DatabaseConfigUtil extends OrmLiteConfigUtil {
+    /*
+    private static final Class<?>[] classes = new Class[] {
+            VcUser.class
+    };
+    */
+
 	public static void main(String[] args) throws Exception {
 		writeConfigFile("db_config.bin");
 	}

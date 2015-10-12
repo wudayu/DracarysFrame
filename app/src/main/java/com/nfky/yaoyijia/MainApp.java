@@ -47,4 +47,7 @@ public class MainApp extends Application {
 		L.writeLogs(false);
 	}
 
+	public int getHaha() {
+		return 1;
+	}
 }
