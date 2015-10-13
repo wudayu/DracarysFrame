@@ -376,19 +376,11 @@ public class FileHandler implements IFileHandler {
 	 */
 	@Override
 	public String getFileNameWithoutSuffix(String path) {
-		if (Utils.isNull(path)) {
-			return "";
-		}
-		File f = new File(path);
-		if (f.exists()) {
-			String name = f.getName();
-			if (name.contains(".")) {
-				return name.substring(0, name.lastIndexOf("."));
-			} else {
-				return name;
-			}
+		String name = getFileName(path);
+		if (name.contains(".")) {
+			return name.substring(0, name.lastIndexOf("."));
 		} else {
-			return "";
+			return name;
 		}
 	}
 

@@ -68,13 +68,15 @@ public class FileTest extends AndroidTestCase {
      */
     public void testGetFileBaseNameAndFileExtension() {
         IFileHandler fileHandler = FileHandler.getInstance(getContext());
-        String fileName = "http://www.google.com/wudayu/README.md";
+        final String BASE_NAME = "http://www.google.com/wudayu/README";
+        final String EXTENSION = "md";
+        String fileName = BASE_NAME + "." + EXTENSION;
+
         String baseName = fileHandler.getFileBaseName(fileName);
         String extension = fileHandler.getFileExtension(fileName);
-        Utils.debug("-----baseName = " + baseName);
-        Utils.debug("----extension = " + extension);
-        assertEquals(baseName, "http://www.google.com/wudayu/README");
-        assertEquals(extension, "md");
+
+        assertEquals(baseName, BASE_NAME);
+        assertEquals(extension, EXTENSION);
     }
 
     /**
@@ -97,5 +99,24 @@ public class FileTest extends AndroidTestCase {
         fileHandler.deleteFile(sourceFile);
         fileHandler.deleteFile(targetFile);
         assertEquals(TEST_CONTEXT, targetContent);
+    }
+
+    /**
+     * 测试: getDirPath() getFileName() getFileNameWithoutSuffix()
+     */
+    public void testGetDirPathAndFileNameAndFileNameWithoutSuffix() {
+        IFileHandler fileHandler = FileHandler.getInstance(getContext());
+        final String DIR_PATH = "http://www.google.com/m/test";
+        final String FILE_NAME_WITHOUT_SUFFIX = "wudayu";
+        final String FILE_NAME = FILE_NAME_WITHOUT_SUFFIX + ".md";
+        String testPath = DIR_PATH + "/" + FILE_NAME;
+
+        String dirPath = fileHandler.getDirPath(testPath);
+        String fileName = fileHandler.getFileName(testPath);
+        String fileNameWithoutSuffix = fileHandler.getFileNameWithoutSuffix(testPath);
+
+        assertEquals(DIR_PATH, dirPath);
+        assertEquals(FILE_NAME, fileName);
+        assertEquals(FILE_NAME_WITHOUT_SUFFIX, fileNameWithoutSuffix);
     }
 }
