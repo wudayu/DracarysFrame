@@ -12,6 +12,9 @@ import com.nfky.yaoyijia.model.VcUser;
  */
 public class DbTest extends AndroidTestCase {
 
+    /**
+     * 测试: getForUserInfo() setForUserInfo()
+     */
     public void testGetSetForUserInfo() {
         String userId = "b2e98c8d87afa3c3498ad";
         String mphone = "18651817673";

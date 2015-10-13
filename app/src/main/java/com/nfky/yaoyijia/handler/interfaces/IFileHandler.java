@@ -71,6 +71,8 @@ public interface IFileHandler {
 
 	boolean isFileExists(String filePath);
 
+	boolean createFile(String filePath) throws IOException;
+
 	boolean createFolder(String folderPath);
 
 	boolean deleteFile(String filePathAndName);
@@ -94,6 +96,8 @@ public interface IFileHandler {
 	String getFileNameWithoutSuffix(String path);
 
 	String readTextFile(String path);
+
+    void writeTextFile(String path, String content);
 
 	ArrayList<String> listFiles(String path, FileFilter filter, boolean recursive);
 

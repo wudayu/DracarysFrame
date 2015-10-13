@@ -1,11 +1,13 @@
 package com.nfky.yaoyijia.handler;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -143,6 +145,18 @@ public class FileHandler implements IFileHandler {
 	}
 
 	/**
+	 * 创建一个新文件
+	 *
+	 * @param filePath 要创建的文件路径
+	 * @return true->已经创建
+	 */
+	@Override
+	public boolean createFile(String filePath) throws IOException {
+		File path = new File(filePath);
+		return path.exists() || path.createNewFile();
+	}
+
+	/**
 	 * 创建文件夹，可递归创建
 	 * 
 	 * @param folderPath 文件夹路径
@@ -240,7 +254,7 @@ public class FileHandler implements IFileHandler {
 		if (fileName == null || !fileName.contains(".")) {
 			return null;
 		}
-		return fileName.substring(0, fileName.indexOf("."));
+		return fileName.substring(0, fileName.lastIndexOf("."));
 	}
 
 	/**
@@ -388,30 +402,35 @@ public class FileHandler implements IFileHandler {
 	public String readTextFile(String path) {
 		File file = new File(path);
 		if (file.isFile()) {
-			InputStream is = null;
-			BufferedReader buffreader = null;
+			InputStream inputStream = null;
+			BufferedReader buffReader = null;
 			try {
-				String content = null;
-				is = new FileInputStream(file);
-				if (is != null) {
-					buffreader = new BufferedReader(new InputStreamReader(is));
+				StringBuffer content = new StringBuffer();
+				inputStream = new FileInputStream(file);
+				if (inputStream != null) {
+					buffReader = new BufferedReader(new InputStreamReader(inputStream));
 					String line;
-					while ((line = buffreader.readLine()) != null) {
-						content += line;// 这里要不要加\n看应用中具体需求吧。
+					while ((line = buffReader.readLine()) != null) {
+                        // 此处在换行处加了换行符
+                        if (content.length() > 0) {
+                            content.append("\n");
+                        }
+						content.append(line);
 					}
 				}
-				return content;
+
+				return content.toString();
 			} catch (IOException e) {
 				Utils.debug(e.toString());
 			} finally {
 				try {
-					if (buffreader != null) {
-						buffreader.close();
-						buffreader = null;
+					if (buffReader != null) {
+						buffReader.close();
+						buffReader = null;
 					}
-					if (is != null) {
-						is.close();
-						is = null;
+					if (inputStream != null) {
+						inputStream.close();
+						inputStream = null;
 					}
 				} catch (IOException e) {
 					Utils.debug(e.toString());
@@ -420,6 +439,39 @@ public class FileHandler implements IFileHandler {
 		}
 		return null;
 	}
+
+    /**
+     * 向指定文件写入制定内容
+     *
+     * @param path 制定文件路径
+     * @param content 指定内容
+     */
+    public void writeTextFile(String path, String content) {
+        File file = new File(path);
+        FileWriter fileWriter = null;
+        BufferedWriter bufWriter = null;
+        try {
+            fileWriter = new FileWriter(file, true);
+            bufWriter = new BufferedWriter(fileWriter);
+            bufWriter.write(content);
+            bufWriter.newLine();
+        } catch (IOException e) {
+            Utils.debug(e.toString());
+        } finally {
+            try {
+                if (bufWriter != null) {
+                    bufWriter.close();
+                    bufWriter = null;
+                }
+                if (fileWriter != null) {
+                    fileWriter.close();
+                    fileWriter = null;
+                }
+            } catch (IOException e) {
+                Utils.debug(e.toString());
+            }
+        }
+    }
 
 	/**
 	 * 列出指定目录下的文件，支持过滤器和递归。 因为担心开发者在写FileFilter时不经意把当前目录下的子目录过滤掉，所以代码中做了特殊处理，

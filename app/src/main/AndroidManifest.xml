@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- UMeng QQ and QZone need this permission -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- uses-permission android:name="android.permission.GET_TASKS" /-->
 
 	<application
         android:name=".MainApp"
