@@ -190,7 +190,7 @@ public class FileTest extends AndroidTestCase {
     }
 
     /**
-     * 测试: getFileNameInUrl
+     * 测试: getFileNameInUrl()
      */
     public void testGetFileNameInUrl() {
         IFileHandler fileHandler = FileHandler.getInstance(getContext());

@@ -20,6 +20,7 @@ public class VcUser {
 
 	public static final String USER_ID = "user_id";
 	public static final String USER_NAME = "user_name";
+	public static final String USER_PASS = "user_pass";
 	public static final String SCREEN_NAME = "screen_name";
 	public static final String M_PHONE = "m_phone";
 	public static final String PHOTO_SRC = "photo_src";
@@ -32,6 +33,8 @@ public class VcUser {
 	String id;
 	@DatabaseField(columnName = USER_NAME)
 	String name;
+    @DatabaseField(columnName = USER_PASS)
+    String password;
 	@DatabaseField(columnName = SCREEN_NAME)
 	String screenName;
 	@DatabaseField(columnName = M_PHONE)
@@ -60,6 +63,14 @@ public class VcUser {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 	public String getScreenName() {
 		return screenName;

@@ -112,7 +112,7 @@ public class RetrofitNetHandler implements INetHandler {
             typedImages.put(INetHandler.UPLOAD_PIC_FILE_KEY + System.currentTimeMillis(), new TypedImage(imagePath));
         }
 
-        // new TypedImage(imagePath) ==also=can=be==> new TypedFile("image/jpg", new File(imagePath)) and the "image/jpg"can also be "audio/mp3" and so on
+        // new TypedImage(imagePath) ==also=can=be==> new TypedFile("image/jpg", new File(imagePath)) and the "image/jpg" can also be "audio/mp3" and so on
         */
         /* MultipartTypedOutput method */
         MultipartTypedOutput typedImages = new MultipartTypedOutput();
@@ -131,30 +131,28 @@ public class RetrofitNetHandler implements INetHandler {
 	 */
 	public class AuthRequestInterceptor implements RequestInterceptor {
 
+        private VcUser user;
+
 	    @Override
 	    public void intercept(RequestFacade requestFacade) {
 
-	        // if (user != null) {
+	        if (user != null) {
 	            final String authorizationValue = encodeCredentialsForBasicAuthorization();
 	            requestFacade.addHeader("Authorization", authorizationValue);
-	        //}
+	        }
 	    }
 
 	    private String encodeCredentialsForBasicAuthorization() {
-	    	final String username = "deadmin";
-	    	final String password = "deadmin";
-	        final String userAndPassword = username + ":" + password;
+	        final String userAndPassword = user.getName() + ":" + user.getPassword();
 	        return "Basic " + Base64.encodeToString(userAndPassword.getBytes(), Base64.NO_WRAP);
 	    }
 
-	    /*
-	    public User getUser() {
+	    public VcUser getUser() {
 	        return user;
 	    }
 
-	    public void setUser(User user) {
+	    public void setUser(VcUser user) {
 	        this.user = user;
 	    }
-	    */
 	}
 }
