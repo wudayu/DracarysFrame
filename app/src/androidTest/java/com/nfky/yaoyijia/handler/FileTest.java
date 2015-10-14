@@ -5,12 +5,16 @@ import android.test.AndroidTestCase;
 import com.nfky.yaoyijia.generic.Utils;
 import com.nfky.yaoyijia.handler.interfaces.IFileHandler;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by David on 10/13/15.
  */
 public class FileTest extends AndroidTestCase {
+
     /**
      * 测试: createFile() isFileExists() deleteFile()
      */
@@ -34,12 +38,12 @@ public class FileTest extends AndroidTestCase {
      */
     public void testCreateAndDeleteFolder() {
         IFileHandler fileHandler = FileHandler.getInstance(getContext());
-        String targetFileFolder = fileHandler.getCacheDir() + "/TEST_FLODRER_54a9a4bdca85/";
+        String targetFolder = fileHandler.getCacheDir() + "/TEST_FLODRER_54a9a4bdca85/";
 
-        fileHandler.createFolder(targetFileFolder);
-        assertTrue(fileHandler.isFileExists(targetFileFolder));
-        fileHandler.deleteFolder(targetFileFolder, false);
-        assertFalse(fileHandler.isFileExists(targetFileFolder));
+        fileHandler.createFolder(targetFolder);
+        assertTrue(fileHandler.isFileExists(targetFolder));
+        fileHandler.deleteFolder(targetFolder, false);
+        assertFalse(fileHandler.isFileExists(targetFolder));
     }
 
     /**
@@ -80,7 +84,7 @@ public class FileTest extends AndroidTestCase {
     }
 
     /**
-     * 测试: copyFile() readTextFile()
+     * 测试: copyFile() readTextFile() writeTextFile()
      */
     public void testCopyFile() {
         IFileHandler fileHandler = FileHandler.getInstance(getContext());
@@ -119,4 +123,83 @@ public class FileTest extends AndroidTestCase {
         assertEquals(FILE_NAME, fileName);
         assertEquals(FILE_NAME_WITHOUT_SUFFIX, fileNameWithoutSuffix);
     }
+
+    /**
+     * 测试: listFiles()
+     */
+    public void testListFiles() {
+        IFileHandler fileHandler = FileHandler.getInstance(getContext());
+        String outterFile01 = fileHandler.getCacheDir() + "/TEST_FILE_23df4b32ce4901";
+        String outterFile02 = fileHandler.getCacheDir() + "/TEST_FILE_23df1c32ce4902";
+        String outterFolder = fileHandler.getCacheDir() + "/TEST_FOLDER_f243dce4902";
+        String innerFile = outterFolder + "/TEST_FILE_23df2a32cd2903";
+
+        try {
+            fileHandler.createFile(outterFile01);
+            fileHandler.createFile(outterFile02);
+            fileHandler.createFolder(outterFolder);
+            fileHandler.createFile(innerFile);
+        } catch (IOException ex) {
+            Utils.debug(ex.toString());
+        }
+
+        List<String> fileList = fileHandler.listFiles(fileHandler.getCacheDir(), new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getName().contains("TEST_");
+            }
+        }, true);
+
+        fileHandler.deleteFile(outterFile01);
+        fileHandler.deleteFile(outterFile02);
+        fileHandler.deleteFolder(outterFolder, true);
+
+        assertTrue(fileList.contains(outterFile01));
+        assertTrue(fileList.contains(outterFile02));
+        assertTrue(fileList.contains(innerFile));
+        assertEquals(fileList.size(), 3);
+    }
+
+    /**
+     * 测试: renameFile()
+     */
+    public void testRenameFile() {
+        IFileHandler fileHandler = FileHandler.getInstance(getContext());
+        String originFile = fileHandler.getCacheDir() + "/TEST_FILE_23df4b32dd4901";
+        String newFile = fileHandler.getCacheDir() + "/TEST_FILE_23df1c32dd4902";
+
+        try {
+            fileHandler.createFile(originFile);
+        } catch (IOException ex) {
+            Utils.debug(ex.toString());
+        }
+
+        fileHandler.renameFile(originFile, newFile);
+        List<String> fileList = fileHandler.listFiles(fileHandler.getCacheDir(), new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getName().contains("TEST_");
+            }
+        }, true);
+
+        fileHandler.deleteFile(originFile);
+        fileHandler.deleteFile(newFile);
+
+        assertEquals(fileList.size(), 1);
+        assertEquals(fileList.get(0), newFile);
+    }
+
+    /**
+     * 测试: getFileNameInUrl
+     */
+    public void testGetFileNameInUrl() {
+        IFileHandler fileHandler = FileHandler.getInstance(getContext());
+        final String FILE_NAME = "wudayu.md";
+        final String FILE_PATH = "http://www.google.com/m/" + FILE_NAME;
+
+        String fileName = fileHandler.getFileNameInUrl(FILE_PATH);
+
+        assertEquals(fileName, FILE_NAME);
+    }
+
 }
