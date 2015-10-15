@@ -11,35 +11,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseResult {
 
+    /** resultCode 请求码 */
     /**
-     * The constant RC_REQUEST_FINISHED. resultCode 请求码
+     * The constant RC_REQUEST_FINISHED. 成功返回
      */
-    public static final int RC_REQUEST_FINISHED = 200;      // 成功返回
+    public static final int RC_REQUEST_FINISHED = 200;
     /**
-     * The constant RC_SESSION_OUTOFDATE.
+     * The constant RC_SESSION_OUTOFDATE. Token过期
      */
-    public static final int RC_SESSION_OUTOFDATE = 401;     // Token过期
+    public static final int RC_SESSION_OUTOFDATE = 401;
     /**
-     * The constant RC_VERSION_OUTOFDATE.
+     * The constant RC_VERSION_OUTOFDATE. 版本需要更新
      */
-    public static final int RC_VERSION_OUTOFDATE = 404;     // 版本需要更新
+    public static final int RC_VERSION_OUTOFDATE = 404;
     /**
-     * The constant RC_SERVER_CANT_HANDLE.
+     * The constant RC_SERVER_CANT_HANDLE. 服务端无法处理
      */
-    public static final int RC_SERVER_CANT_HANDLE = 500;    // 服务端无法处理
+    public static final int RC_SERVER_CANT_HANDLE = 500;
 
+
+    /** messageType 返回的消息类型 */
     /**
-     * The constant MESSAGE_TYPE_NORMAL. messageType 返回的消息类型
+     * The constant MESSAGE_TYPE_NORMAL. 普通消息类型
      */
-    public static final int MESSAGE_TYPE_NORMAL = 1;        //普通消息类型
+    public static final int MESSAGE_TYPE_NORMAL = 1;
     /**
-     * The constant MESSAGE_TYPE_SHOW.
+     * The constant MESSAGE_TYPE_SHOW. 需要使用Toast显示的消息类型
      */
-    public static final int MESSAGE_TYPE_SHOW = 2;          //需要使用Toast显示的消息类型
+    public static final int MESSAGE_TYPE_SHOW = 2;
     /**
-     * The constant MESSAGE_TYPE_NEED_CONFIRMED.
+     * The constant MESSAGE_TYPE_NEED_CONFIRMED. 需要点击确定才会消失的消息类型
      */
-    public static final int MESSAGE_TYPE_NEED_CONFIRMED = 3;//需要点击确定才会消失的消息类型
+    public static final int MESSAGE_TYPE_NEED_CONFIRMED = 3;
+
 
     @JsonProperty(value = "resultCode")
     private int resultCode;
