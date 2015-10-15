@@ -11,16 +11,27 @@ import java.net.URL;
 
 /**
  * Created by David on 8/25/15.
- *
+ * <p/>
  * 带安全验证的图片下载器
  */
-
 public class ImageDownloaderWithAccessToken extends BaseImageDownloader {
 
+    /**
+     * Instantiates a new Image downloader with access token.
+     *
+     * @param context the context
+     */
     public ImageDownloaderWithAccessToken(Context context) {
         super(context);
     }
 
+    /**
+     * Instantiates a new Image downloader with access token.
+     *
+     * @param context        the context
+     * @param connectTimeout the connect timeout
+     * @param readTimeout    the read timeout
+     */
     public ImageDownloaderWithAccessToken(Context context, int connectTimeout, int readTimeout) {
         super(context, connectTimeout, readTimeout);
     }

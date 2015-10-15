@@ -19,7 +19,7 @@ import java.util.Locale;
 
 /**
  * Created by David on 9/11/15.
- *
+ * <p/>
  * 日志处理类，包括日常日志和异常日志处理，其中，日常日志的具体操作和应用场景需要在具体的情况下来重新编写
  */
 public class LogHandler implements ILogHandler {
@@ -33,6 +33,12 @@ public class LogHandler implements ILogHandler {
 
     private LogHandler() {}
 
+    /**
+     * Gets instance.
+     *
+     * @param context the context
+     * @return the instance
+     */
     public static ILogHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (LogHandler.class) {
@@ -122,7 +128,8 @@ public class LogHandler implements ILogHandler {
      * Print the message into file
      * 不适合连续调用
      *
-     * @param message 写入日志文件的信息
+     * @param fileName the file name
+     * @param message  写入日志文件的信息
      */
     public synchronized void output(String fileName, String message) {
         File file = new File(cachePath, fileName);

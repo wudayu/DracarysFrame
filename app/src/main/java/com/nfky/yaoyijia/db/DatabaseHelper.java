@@ -13,22 +13,20 @@ import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.model.VcUser;
 
 /**
- *
  * Created by David on 8/26/15.
- *
+ * <p/>
  * OrmLite的DatabaseHelper 主要包含了建表工作和版的控制工作
- *
- **/
+ */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final String DATABASE_NAME = "wudayu_yyj.db";
 	private static final int DATABASE_VERSION = 1;
 	private Context mContext;
 
-    /**
-     * 初始化DatabaseHelper，将建表内容指向事先生成的R.raw.db_config
-     *
-     * @param context 上下文
-     */
+	/**
+	 * 初始化DatabaseHelper，将建表内容指向事先生成的R.raw.db_config
+	 *
+	 * @param context 上下文
+	 */
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.db_config);
 		mContext = context;

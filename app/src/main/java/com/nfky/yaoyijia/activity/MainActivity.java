@@ -26,27 +26,51 @@ import java.util.List;
 
 
 /**
- *
  * Created by David on 5/24/15.
- *
+ * <p/>
  * Description: MainActivity是项目的真正主界面当所有数据加载完成后，用户看到的就是这个页面。他包括了一个ViewPager和一个PageSelectBar
- *
- **/
-
+ */
 public class MainActivity extends BaseActivity {
 
 	private static final int PAGE_COUNT = 3;
 
-    ILogHandler logHandler = null;
+	/**
+	 * The Log handler.
+	 */
+	ILogHandler logHandler = null;
 
+	/**
+	 * The Vp main.
+	 */
 	SwitchViewPager vpMain = null;
+	/**
+	 * The Psb main.
+	 */
 	PageSelectBar psbMain = null;
+	/**
+	 * The Iv back.
+	 */
 	ImageView ivBack = null;
+	/**
+	 * The Tv title.
+	 */
 	TextView tvTitle = null;
 
+	/**
+	 * The Home fragment.
+	 */
 	HomeFragment homeFragment = null;
+	/**
+	 * The Circle fragment.
+	 */
 	CircleFragment circleFragment = null;
+	/**
+	 * The Purchase fragment.
+	 */
 	PurchaseFragment purchaseFragment = null;
+	/**
+	 * The Mine fragment.
+	 */
 	MineFragment mineFragment = null;
 
 

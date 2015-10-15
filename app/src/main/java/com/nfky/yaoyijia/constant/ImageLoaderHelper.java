@@ -1,13 +1,10 @@
 package com.nfky.yaoyijia.constant;
 
 /**
- *
  * Created by David on 5/26/15.
- * 
+ * <p/>
  * ImageLoaderHelper是ImageLoader的帮助类，它通过拼接Schema来帮助ImageLoader来定位图片资源
- *
- **/
-
+ */
 public class ImageLoaderHelper {
 
 	/*
@@ -19,13 +16,19 @@ public class ImageLoaderHelper {
 	 * String imageUri = "drawable://" + R.drawable.image; // from drawables (only images, non-9patch)
 	 */
 
-	// 文件头
+	/**
+	 * The constant URI_PREFIX_FILE. 文件头
+	 */
 	public static final String URI_PREFIX_FILE = "file://";
 
-	// 资源头
+	/**
+	 * The constant URI_PREFIX_ASSETS. 资源头
+	 */
 	public static final String URI_PREFIX_ASSETS = "assets://";
 
-	// 图片头
+	/**
+	 * The constant URI_PREFIX_DRAWABLE. 图片头
+	 */
 	public static final String URI_PREFIX_DRAWABLE = "drawable://";
 
 }

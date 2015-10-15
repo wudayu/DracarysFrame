@@ -15,15 +15,14 @@ import java.util.Map;
 
 /**
  * Created by David on 9/14/15.
- *
+ * <p/>
  * 意外异常的捕捉类
- *
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private Context context = null;
     private ILogHandler logHandler = null;
-    //系统默认的UncaughtExceptionHandler
+    /** 系统默认的UncaughtExceptionHandler */
     private Thread.UncaughtExceptionHandler defaultHandler = null;
 
 
@@ -32,6 +31,12 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private CrashHandler() {}
 
+    /**
+     * Gets instance.
+     *
+     * @param context the context
+     * @return the instance
+     */
     public static Thread.UncaughtExceptionHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (CrashHandler.class) {
@@ -100,7 +105,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 获取设备参数文本信息
      *
-     * @return 设备参数信息的字符串
+     * @return 设备参数信息的字符串 device info
      */
     public String getDeviceInfo() {
         StringBuilder sb = new StringBuilder();
@@ -117,7 +122,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 获取异常中的文本信息
      *
      * @param ex 需要处理的异常
-     * @return String形式的异常信息
+     * @return String形式的异常信息 exception info
      */
     public String getExceptionInfo(Throwable ex) {
         Writer writer = new StringWriter();

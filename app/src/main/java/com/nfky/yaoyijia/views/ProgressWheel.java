@@ -90,6 +90,9 @@ public class ProgressWheel extends View {
 
     /**
      * The constructor for the ProgressWheel
+     *
+     * @param context the context
+     * @param attrs   the attrs
      */
     public ProgressWheel(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -100,6 +103,8 @@ public class ProgressWheel extends View {
 
     /**
      * The constructor for the ProgressWheel
+     *
+     * @param context the context
      */
     public ProgressWheel(Context context) {
         super(context);
@@ -265,6 +270,11 @@ public class ProgressWheel extends View {
 
     }
 
+    /**
+     * Sets callback.
+     *
+     * @param progressCallback the progress callback
+     */
     public void setCallback(ProgressCallback progressCallback) {
         callback = progressCallback;
 
@@ -394,8 +404,9 @@ public class ProgressWheel extends View {
 
     /**
      * Check if the wheel is currently spinning
+     *
+     * @return the boolean
      */
-
     public boolean isSpinning() {
         return isSpinning;
     }
@@ -558,8 +569,9 @@ public class ProgressWheel extends View {
     //----------------------------------
 
     /**
-     * @return the current progress between 0.0 and 1.0,
-     * if the wheel is indeterminate, then the result is -1
+     * Gets progress.
+     *
+     * @return the current progress between 0.0 and 1.0, if the wheel is indeterminate, then the result is -1
      */
     public float getProgress() {
         return isSpinning ? -1 : mProgress / 360.0f;
@@ -578,6 +590,8 @@ public class ProgressWheel extends View {
     }
 
     /**
+     * Gets circle radius.
+     *
      * @return the radius of the wheel in pixels
      */
     public int getCircleRadius() {
@@ -597,6 +611,8 @@ public class ProgressWheel extends View {
     }
 
     /**
+     * Gets bar width.
+     *
      * @return the width of the spinning bar
      */
     public int getBarWidth() {
@@ -616,6 +632,8 @@ public class ProgressWheel extends View {
     }
 
     /**
+     * Gets bar color.
+     *
      * @return the color of the spinning bar
      */
     public int getBarColor() {
@@ -637,6 +655,8 @@ public class ProgressWheel extends View {
     }
 
     /**
+     * Gets rim color.
+     *
      * @return the color of the wheel's contour
      */
     public int getRimColor() {
@@ -657,9 +677,9 @@ public class ProgressWheel extends View {
     }
 
     /**
-     * @return the base spinning speed, in full circle turns per second
-     * (1.0 equals on full turn in one second), this value also is applied for
-     * the smoothness when setting a progress
+     * Gets spin speed.
+     *
+     * @return the base spinning speed, in full circle turns per second (1.0 equals on full turn in one second), this value also is applied for the smoothness when setting a progress
      */
     public float getSpinSpeed() {
         return spinSpeed / 360.0f;
@@ -677,6 +697,8 @@ public class ProgressWheel extends View {
     }
 
     /**
+     * Gets rim width.
+     *
      * @return the width of the wheel's contour in pixels
      */
     public int getRimWidth() {
@@ -695,19 +717,60 @@ public class ProgressWheel extends View {
         }
     }
 
+    /**
+     * The type Wheel saved state.
+     */
     static class WheelSavedState extends BaseSavedState {
+        /**
+         * The M progress.
+         */
         float mProgress;
+        /**
+         * The M target progress.
+         */
         float mTargetProgress;
+        /**
+         * The Is spinning.
+         */
         boolean isSpinning;
+        /**
+         * The Spin speed.
+         */
         float spinSpeed;
+        /**
+         * The Bar width.
+         */
         int barWidth;
+        /**
+         * The Bar color.
+         */
         int barColor;
+        /**
+         * The Rim width.
+         */
         int rimWidth;
+        /**
+         * The Rim color.
+         */
         int rimColor;
+        /**
+         * The Circle radius.
+         */
         int circleRadius;
+        /**
+         * The Linear progress.
+         */
         boolean linearProgress;
+        /**
+         * The Fill radius.
+         */
         boolean fillRadius;
 
+        /**
+         * Instantiates a new Wheel saved state.
+         *
+         * @param superState the super state
+         */
         WheelSavedState(Parcelable superState) {
             super(superState);
         }
@@ -743,7 +806,10 @@ public class ProgressWheel extends View {
             out.writeByte((byte) (fillRadius ? 1 : 0));
         }
 
-        //required field that makes Parcelables from a Parcel
+        /**
+         * The constant CREATOR.
+         */
+//required field that makes Parcelables from a Parcel
         public static final Parcelable.Creator<WheelSavedState> CREATOR =
                 new Parcelable.Creator<WheelSavedState>() {
                     public WheelSavedState createFromParcel(Parcel in) {
@@ -756,12 +822,15 @@ public class ProgressWheel extends View {
                 };
     }
 
+    /**
+     * The interface Progress callback.
+     */
     public interface ProgressCallback {
         /**
          * Method to call when the progress reaches a value
          * in order to avoid float precision issues, the progress
          * is rounded to a float with two decimals.
-         *
+         * <p/>
          * In indeterminate mode, the callback is called each time
          * the wheel completes an animation cycle, with, the progress value is -1.0f
          *

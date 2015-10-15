@@ -23,18 +23,28 @@ import rx.functions.Func1;
 
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * Description: 第三个Fragment，用来测试响应式线程的使用
- **/
-
+ */
 public class PurchaseFragment extends BaseFragment {
 
+    /**
+     * The Ptl main.
+     */
     PullToLoadView ptlMain;
+    /**
+     * The M recycler view.
+     */
     RecyclerView mRecyclerView;
 
+    /**
+     * The Is loading.
+     */
     boolean isLoading = false;
+    /**
+     * The Adapter.
+     */
     TestRecyclerViewAdapter adapter;
 
     @Override
@@ -118,6 +128,9 @@ public class PurchaseFragment extends BaseFragment {
         });
     }
 
+    /**
+     * The New data.
+     */
     List<String> newData = new ArrayList<>();
     @Override
     protected void initData() {
@@ -135,6 +148,9 @@ public class PurchaseFragment extends BaseFragment {
         ptlMain.initLoad();
     }
 
+    /**
+     * The Load more handler.
+     */
     Handler loadMoreHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -145,6 +161,10 @@ public class PurchaseFragment extends BaseFragment {
             isLoading = false;
         }
     };
+
+    /**
+     * Add data.
+     */
     public void addData() {
         newData.clear();
         for (int i = 0; i < 20; ++i) {

@@ -14,12 +14,10 @@ import com.nfky.yaoyijia.net.RetrofitNetHandler;
 import com.nfky.yaoyijia.net.protocol.VcUserResult;
 
 /**
- *
  * Created by David on 8/26/15.
- *
+ * <p/>
  * 数据控制器，用来统一管理数据库或网络访问方式
- *
- **/
+ */
 public class DataHandler implements IDataHandler {
 
 	private Activity context = null;
@@ -31,7 +29,13 @@ public class DataHandler implements IDataHandler {
 
 	private DataHandler() {}
 
-    public static IDataHandler getInstance(Activity context) {
+	/**
+	 * Gets instance.
+	 *
+	 * @param context the context
+	 * @return the instance
+	 */
+	public static IDataHandler getInstance(Activity context) {
         if (instance == null) {
             synchronized (DataHandler.class) {
                 if (instance == null) {

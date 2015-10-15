@@ -8,17 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- *
  * Created by David on 5/24/15.
- *
+ * <p/>
  * ViewPagerAdapter是PagerAdapter的子类，它是View的PagerAdapter
- *
- **/
-
+ */
 public class ViewPagerAdapter extends PagerAdapter {
 
+	/**
+	 * The Views.
+	 */
 	protected List<View> views;
 
+	/**
+	 * Instantiates a new View pager adapter.
+	 */
 	public ViewPagerAdapter() {
 		this.views = new ArrayList<View>();
 	}
@@ -64,21 +67,21 @@ public class ViewPagerAdapter extends PagerAdapter {
 		return this.views.size();
 	}
 
-    /**
-     * 获取指定位置的View
-     *
-     * @param position
-     * @return 指定位置的View
-     */
+	/**
+	 * 获取指定位置的View
+	 *
+	 * @param position the position
+	 * @return 指定位置的View view
+	 */
 	public View getView(int position) {
 		return this.views.get(position);
 	}
 
-    /**
-     * 获取所有的View
-     *
-     * @return 所有的View
-     */
+	/**
+	 * 获取所有的View
+	 *
+	 * @return 所有的View views
+	 */
 	public List<View> getViews() {
 		return this.views;
     }

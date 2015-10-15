@@ -53,26 +53,41 @@ import com.nfky.yaoyijia.image.component.ImageDownloaderWithAccessToken;
 import com.nfky.yaoyijia.views.SelectPicPopupWindow;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * UILImageHander是使用了Universal Image Loader来控制图片的单例类，它可以加载普通图片，加载圆角图片，加载圆形图片以及选择图片来源，对图片进行切割处理等功能
- *
- **/
-
+ */
 public class UILImageHandler implements IImageHandler {
 
 	private Context context = null;
 	private ISdCardHandler sdCard = null;
 	private IFileHandler fileHandler = null;
 
+	/**
+	 * The Image loader.
+	 */
 	ImageLoader imageLoader = null;
+	/**
+	 * The Default uil loader.
+	 */
 	ImageLoaderConfiguration defaultUilLoader = null;
 
+	/**
+	 * The Default uil display.
+	 */
 	DisplayImageOptions defaultUilDisplay = null;
+	/**
+	 * The Round uil display.
+	 */
 	DisplayImageOptions roundUilDisplay = null;
+	/**
+	 * The Header uil display.
+	 */
 	DisplayImageOptions headerUilDisplay = null;
 
+	/**
+	 * The M image cache dir.
+	 */
 	String mImageCacheDir = null;
 
 	/** Generate Singleton */
@@ -80,7 +95,13 @@ public class UILImageHandler implements IImageHandler {
 
 	private UILImageHandler() {}
 
-    public static IImageHandler getInstance(Context context) {
+	/**
+	 * Gets instance.
+	 *
+	 * @param context the context
+	 * @return the instance
+	 */
+	public static IImageHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (UILImageHandler.class) {
                 if (instance == null) {
@@ -312,9 +333,21 @@ public class UILImageHandler implements IImageHandler {
 	 */
 	public class SaveCacheImageLoadingListener implements ImageLoadingListener {
 
+		/**
+		 * The Full path.
+		 */
 		String fullPath = null;
+		/**
+		 * The Outside loading listener.
+		 */
 		ImageLoadingListener outsideLoadingListener = null;
 
+		/**
+		 * Instantiates a new Save cache image loading listener.
+		 *
+		 * @param fullPath               the full path
+		 * @param outsideLoadingListener the outside loading listener
+		 */
 		public SaveCacheImageLoadingListener(String fullPath, ImageLoadingListener outsideLoadingListener) {
 			this.fullPath = fullPath;
 			this.outsideLoadingListener = outsideLoadingListener;

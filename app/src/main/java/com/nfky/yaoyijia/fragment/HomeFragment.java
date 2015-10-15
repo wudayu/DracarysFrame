@@ -26,20 +26,32 @@ import com.nfky.yaoyijia.views.BannerView;
 import com.nfky.yaoyijia.views.CountDownView;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * Description: 首页Fragment
- *
- **/
-
+ */
 public class HomeFragment extends BaseFragment {
 
+	/**
+	 * The Iv test.
+	 */
 	ImageView ivTest = null;
+	/**
+	 * The Bv banner.
+	 */
 	BannerView bvBanner = null;
+	/**
+	 * The Edt test autohide.
+	 */
 	EditText edtTestAutohide = null;
+	/**
+	 * The Tv count down.
+	 */
 	CountDownView tvCountDown = null;
 
+	/**
+	 * The Image handler.
+	 */
 	IImageHandler imageHandler = null;
 
 	@Override

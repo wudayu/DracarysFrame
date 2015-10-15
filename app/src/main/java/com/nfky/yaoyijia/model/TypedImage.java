@@ -11,20 +11,27 @@ import org.springframework.http.MediaType;
 import retrofit.mime.TypedOutput;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * TypedImage是对图片进行对象化的类，若需要上传图片，则需要将图片变成次对象类型
  * 此文件请勿修改
- *
- **/
-
+ */
 public class TypedImage extends FileSystemResource implements TypedOutput {
 
+	/**
+	 * Instantiates a new Typed image.
+	 *
+	 * @param file the file
+	 */
 	public TypedImage(File file) {
 		super(file);
 	}
 
+	/**
+	 * Instantiates a new Typed image.
+	 *
+	 * @param path the path
+	 */
 	public TypedImage(String path) {
 		super(path);
 	}

@@ -3,6 +3,9 @@ package com.nfky.yaoyijia.views.imagezoom;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
+/**
+ * The type Fling listener.
+ */
 public class FlingListener extends SimpleOnGestureListener {
 	
 	private float velocityX;
@@ -15,10 +18,20 @@ public class FlingListener extends SimpleOnGestureListener {
 		return true;
 	}
 
+	/**
+	 * Gets velocity x.
+	 *
+	 * @return the velocity x
+	 */
 	public float getVelocityX() {
 		return velocityX;
 	}
-	
+
+	/**
+	 * Gets velocity y.
+	 *
+	 * @return the velocity y
+	 */
 	public float getVelocityY() {
 		return velocityY;
 	}

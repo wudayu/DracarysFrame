@@ -9,15 +9,15 @@ import com.nfky.yaoyijia.image.IImageHandler;
 import com.nfky.yaoyijia.image.UILImageHandler;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * MainApp是整个项目使用的Application，其中初始化了一些操作，如果有需要也可以添加一些全局变量
- *
- **/
-
+ */
 public class MainApp extends Application {
 
+	/**
+	 * The Image handler.
+	 */
 	IImageHandler imageHandler = null;
 
 	@Override
@@ -47,6 +47,11 @@ public class MainApp extends Application {
 		L.writeLogs(false);
 	}
 
+	/**
+	 * Gets haha.
+	 *
+	 * @return the haha
+	 */
 	public int getHaha() {
 		return 1;
 	}

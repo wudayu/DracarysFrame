@@ -12,13 +12,10 @@ import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.adapter.ViewPagerAdapter;
 
 /**
- *
  * Created by David on 8/27/15.
- *
+ * <p/>
  * BannerView是用来展示广告的Banner控件，通过setRolling函数能够设置它的自动滚动机制
- *
- **/
-
+ */
 public class BannerView extends RelativeLayout {
 
 	private Context mContext = null;
@@ -26,18 +23,36 @@ public class BannerView extends RelativeLayout {
 	private DotPageIndicator mIndicator = null;
 	private ViewPagerAdapter mAdapter = null;
 
+	/**
+	 * Instantiates a new Banner view.
+	 *
+	 * @param context  the context
+	 * @param attrs    the attrs
+	 * @param defStyle the def style
+	 */
 	public BannerView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		this.mContext = context;
 		init();
 	}
 
+	/**
+	 * Instantiates a new Banner view.
+	 *
+	 * @param context the context
+	 * @param attrs   the attrs
+	 */
 	public BannerView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.mContext = context;
 		init();
 	}
 
+	/**
+	 * Instantiates a new Banner view.
+	 *
+	 * @param context the context
+	 */
 	public BannerView(Context context) {
 		super(context);
 		this.mContext = context;

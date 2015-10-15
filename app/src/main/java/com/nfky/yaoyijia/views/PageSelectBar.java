@@ -15,13 +15,10 @@ import android.widget.TextView;
 import com.nfky.yaoyijia.R;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * PageSelectBar是主页面下方控制不同标签页的按钮，它可以用来帮助ViewPager来选择相应的页面
- *
- **/
-
+ */
 public class PageSelectBar extends LinearLayout {
 
 	private Context mContext;
@@ -44,11 +41,22 @@ public class PageSelectBar extends LinearLayout {
     // 界面被选中的监听器
 	private PageSelectBarOnPageSelectedListener mPageSelectedListener = null;
 
+	/**
+	 * Instantiates a new Page select bar.
+	 *
+	 * @param context the context
+	 */
 	public PageSelectBar(Context context) {
 		super(context);
 		init(context);
 	}
 
+	/**
+	 * Instantiates a new Page select bar.
+	 *
+	 * @param context the context
+	 * @param attrs   the attrs
+	 */
 	public PageSelectBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
@@ -80,11 +88,11 @@ public class PageSelectBar extends LinearLayout {
 		}
 	}
 
-    /**
-     * 设置每个项目
-     *
-     * @param position 第position个项目
-     */
+	/**
+	 * 设置每个项目
+	 *
+	 * @param position 第position个项目
+	 */
 	public void selectItemUI(int position) {
 		for (int i = 0; i < mItems.size(); ++i) {
 			View item = mItems.get(i);
@@ -131,6 +139,11 @@ public class PageSelectBar extends LinearLayout {
 	private class PageOnClickListener implements OnClickListener {
 		private int position;
 
+		/**
+		 * Instantiates a new Page on click listener.
+		 *
+		 * @param position the position
+		 */
 		public PageOnClickListener(int position) {
 			this.position = position;
 		}
@@ -141,10 +154,23 @@ public class PageSelectBar extends LinearLayout {
 		}
 	}
 
+	/**
+	 * The interface Page select bar on page selected listener.
+	 */
 	public interface PageSelectBarOnPageSelectedListener {
+		/**
+		 * On page selected.
+		 *
+		 * @param position the position
+		 */
 		void onPageSelected(int position);
 	}
 
+	/**
+	 * Sets page select bar on page selected listener.
+	 *
+	 * @param pageSelectedListener the page selected listener
+	 */
 	public void setPageSelectBarOnPageSelectedListener(PageSelectBarOnPageSelectedListener pageSelectedListener) {
 		this.mPageSelectedListener = pageSelectedListener;
 	}

@@ -27,20 +27,17 @@ import android.widget.Toast;
 import com.nfky.yaoyijia.constant.Constant;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * Utils是静态工具类，包括Debug调试函数，标准Toast调用以及诸如防止多次点击的工具
- *
- **/
-
+ */
 public class Utils {
 
 	/**
 	 * Debug function, used to print something
 	 * debug专用函数
-	 * 
-	 * @param message, something that need to print
+	 *
+	 * @param message the message
 	 */
 	public static void debug(String message) {
 		debug(Constant.TAG, message);
@@ -49,21 +46,22 @@ public class Utils {
 	/**
 	 * Debug function, used to print something
 	 * debug专用函数
-	 * 
-	 * @param tag, Debug tag
-	 * @param message, something that need to print
+	 *
+	 * @param tag     the tag
+	 * @param message the message
 	 */
 	public static void debug(String tag, String message) {
 		Log.d(tag, message);
 	}
 
     private static Toast mToast = null;
+
 	/**
 	 * Toast a message in debug level
 	 * toast专用函数
-	 * 
-	 * @param activity, 对应的Activity
-	 * @param message, something that need to print
+	 *
+	 * @param activity the activity
+	 * @param message  the message
 	 */
 	public static void toastMessage(final Activity activity, final String message) {
 		toastMessage(activity, message, Toast.LENGTH_SHORT);
@@ -73,8 +71,9 @@ public class Utils {
 	 * Toast a message in debug level with a length option
 	 * toast专用函数
 	 *
-	 * @param activity, 对应的Activity
-	 * @param message, something that need to print
+	 * @param activity the activity
+	 * @param message  the message
+	 * @param length   the length
 	 */
 	public static void toastMessage(final Activity activity, final String message, final int length) {
 		toastMessage(activity, message, null, length);
@@ -84,9 +83,10 @@ public class Utils {
 	 * Toast a message
 	 * toast专用函数
 	 *
-	 * @param activity, 对应的Activity
-	 * @param message, something that need to print
-	 * @param logLevel, log等级
+	 * @param activity the activity
+	 * @param message  the message
+	 * @param logLevel the log level
+	 * @param length   the length
 	 */
 	public static void toastMessage(final Activity activity, final String message, String logLevel, final int length) {
 		if ("w".equals(logLevel)) {
@@ -112,7 +112,7 @@ public class Utils {
 	/**
 	 * Check the Object is NULL
 	 * 查看对象是否为null
-	 * 
+	 *
 	 * @param object the object
 	 * @return is or not
 	 */
@@ -134,10 +134,11 @@ public class Utils {
 	}
 
     private static long lastClickTime;
+
 	/**
 	 * Prevent Double Click
 	 * 防止快速的两次点击
-	 * 
+	 *
 	 * @return is double click or not
 	 */
 	public static boolean isFastClick() {
@@ -154,7 +155,7 @@ public class Utils {
 	/**
 	 * Get Status Bar Height
 	 * 获取状态栏高度
-	 * 
+	 *
 	 * @param ctx an available activity
 	 * @return height in integer
 	 */
@@ -168,7 +169,7 @@ public class Utils {
 	/**
 	 * Check the email format
 	 * 检查Email格式
-	 * 
+	 *
 	 * @param email the email
 	 * @return right or wrong
 	 */
@@ -181,7 +182,7 @@ public class Utils {
 	/**
 	 * Check the URL format
 	 * 检查URL格式
-	 * 
+	 *
 	 * @param url the url
 	 * @return right or wrong
 	 */
@@ -194,9 +195,9 @@ public class Utils {
 	/**
 	 * If the Keyboard doesn't hide, hide it
 	 * 如果键盘没有隐藏，则隐藏键盘
-	 * 
+	 *
 	 * @param activity an available activity
-	 * @param v 关联控件
+	 * @param v        关联控件
 	 */
 	public static void autoCloseKeyboard(Activity activity, View v) {
 		View view = activity.getWindow().peekDecorView();
@@ -241,9 +242,9 @@ public class Utils {
 	/**
 	 * Get String's MD5
 	 * 获取一个String的md5
-	 * 
+	 *
 	 * @param str the source string
-	 * @return md5的数据
+	 * @return md5的数据 md 5
 	 */
 	public static String getMD5(String str) {
 		String resultString = null;
@@ -258,10 +259,10 @@ public class Utils {
 
 	/**
 	 * Arrays add
-     * int类型数组相加
-	 * 
+	 * int类型数组相加
+	 *
 	 * @param arrays that need to add
-	 * @return 相加后的结果的数组
+	 * @return 相加后的结果的数组 integer [ ]
 	 */
 	public static Integer[] intArrayPlus(Integer[]... arrays) {
 		int size = 0;
@@ -282,10 +283,10 @@ public class Utils {
 
 	/**
 	 * Get device's DeviceId
-     * 获取一台Android机器的IMEI码
-	 * 
+	 * 获取一台Android机器的IMEI码
+	 *
 	 * @param context 上下文
-	 * @return IMEI码
+	 * @return IMEI码 device id
 	 */
 	public static String getDeviceId(Context context) {
 		TelephonyManager telephonyManager;
@@ -298,8 +299,8 @@ public class Utils {
 
 	/**
 	 * Reserves two decimal fractions
-     * 保留double小数点后两位
-	 * 
+	 * 保留double小数点后两位
+	 *
 	 * @param number need reserve
 	 * @return reserved number
 	 */
@@ -310,7 +311,7 @@ public class Utils {
 
 	/**
 	 * Reserves two decimal fractions
-     * 保留double小数点后两位
+	 * 保留double小数点后两位
 	 *
 	 * @param number need reserve
 	 * @return reserved number in string format
@@ -324,6 +325,7 @@ public class Utils {
 	 * 获取设备参数信息
 	 *
 	 * @param context 上下文
+	 * @return the device info
 	 */
 	public static Map<String, String> getDeviceInfo(Context context) {
 		//用来存储设备信息
@@ -359,7 +361,9 @@ public class Utils {
 	 * Review the permission is granted or not
 	 * 查看当前权限是否已经获得（部分用户可能会禁用相关权限）
 	 *
+	 * @param context    the context
 	 * @param permission 使用Manifest.permission下的permission
+	 * @return the boolean
 	 */
 	public boolean doesUserHavePermission(Context context, String permission) {
 		int result = context.checkCallingOrSelfPermission(permission);

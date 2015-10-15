@@ -1,5 +1,8 @@
 package com.nfky.yaoyijia.views.imagezoom;
 
+/**
+ * The type Fling animation.
+ */
 public class FlingAnimation implements Animation {
 	
 	private float velocityX;
@@ -36,19 +39,39 @@ public class FlingAnimation implements Animation {
 		
 		return active;
 	}
-	
+
+	/**
+	 * Sets velocity x.
+	 *
+	 * @param velocityX the velocity x
+	 */
 	public void setVelocityX(float velocityX) {
 		this.velocityX = velocityX;
 	}
-	
+
+	/**
+	 * Sets velocity y.
+	 *
+	 * @param velocityY the velocity y
+	 */
 	public void setVelocityY(float velocityY) {
 		this.velocityY = velocityY;
 	}
-	
+
+	/**
+	 * Sets factor.
+	 *
+	 * @param factor the factor
+	 */
 	public void setFactor(float factor) {
 		this.factor = factor;
 	}
 
+	/**
+	 * Sets listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void setListener(FlingAnimationListener listener) {
 		this.listener = listener;
 	}

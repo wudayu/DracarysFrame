@@ -16,18 +16,24 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 
 /**
- *
  * Created by David on 8/27/15.
- *
+ * <p/>
  * 圆行图片的控件，可自动切割
  * 请勿修改此文件
- *
  */
-
 public class CircleImageView extends ImageView {
 
+    /**
+     * The constant TAG.
+     */
     public static final String TAG = "RoundedImageView";
+    /**
+     * The constant DEFAULT_RADIUS.
+     */
     public static final float DEFAULT_RADIUS = 0f;
+    /**
+     * The constant DEFAULT_BORDER_WIDTH.
+     */
     public static final float DEFAULT_BORDER_WIDTH = 0f;
     private static final ScaleType[] SCALE_TYPES = {
             ScaleType.MATRIX,
@@ -53,14 +59,32 @@ public class CircleImageView extends ImageView {
 
     private ScaleType mScaleType;
 
+    /**
+     * Instantiates a new Circle image view.
+     *
+     * @param context the context
+     */
     public CircleImageView(Context context) {
         super(context);
     }
 
+    /**
+     * Instantiates a new Circle image view.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public CircleImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
+    /**
+     * Instantiates a new Circle image view.
+     *
+     * @param context  the context
+     * @param attrs    the attrs
+     * @param defStyle the def style
+     */
     public CircleImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
@@ -245,14 +269,29 @@ public class CircleImageView extends ImageView {
         super.setBackgroundDrawable(mBackgroundDrawable);
     }
 
+    /**
+     * Gets corner radius.
+     *
+     * @return the corner radius
+     */
     public float getCornerRadius() {
         return cornerRadius;
     }
 
+    /**
+     * Sets corner radius.
+     *
+     * @param resId the res id
+     */
     public void setCornerRadius(int resId) {
         setCornerRadius(getResources().getDimension(resId));
     }
 
+    /**
+     * Sets corner radius.
+     *
+     * @param radius the radius
+     */
     public void setCornerRadius(float radius) {
         if (cornerRadius == radius) { return; }
 
@@ -261,14 +300,29 @@ public class CircleImageView extends ImageView {
         updateBackgroundDrawableAttrs(false);
     }
 
+    /**
+     * Gets border width.
+     *
+     * @return the border width
+     */
     public float getBorderWidth() {
         return borderWidth;
     }
 
+    /**
+     * Sets border width.
+     *
+     * @param resId the res id
+     */
     public void setBorderWidth(int resId) {
         setBorderWidth(getResources().getDimension(resId));
     }
 
+    /**
+     * Sets border width.
+     *
+     * @param width the width
+     */
     public void setBorderWidth(float width) {
         if (borderWidth == width) { return; }
 
@@ -278,18 +332,38 @@ public class CircleImageView extends ImageView {
         invalidate();
     }
 
+    /**
+     * Gets border color.
+     *
+     * @return the border color
+     */
     public int getBorderColor() {
         return borderColor.getDefaultColor();
     }
 
+    /**
+     * Sets border color.
+     *
+     * @param color the color
+     */
     public void setBorderColor(int color) {
         setBorderColor(ColorStateList.valueOf(color));
     }
 
+    /**
+     * Gets border colors.
+     *
+     * @return the border colors
+     */
     public ColorStateList getBorderColors() {
         return borderColor;
     }
 
+    /**
+     * Sets border color.
+     *
+     * @param colors the colors
+     */
     public void setBorderColor(ColorStateList colors) {
         if (borderColor.equals(colors)) { return; }
 
@@ -302,10 +376,20 @@ public class CircleImageView extends ImageView {
         }
     }
 
+    /**
+     * Is oval boolean.
+     *
+     * @return the boolean
+     */
     public boolean isOval() {
         return isOval;
     }
 
+    /**
+     * Sets oval.
+     *
+     * @param oval the oval
+     */
     public void setOval(boolean oval) {
         isOval = oval;
         updateDrawableAttrs();
@@ -313,10 +397,20 @@ public class CircleImageView extends ImageView {
         invalidate();
     }
 
+    /**
+     * Is mutate background boolean.
+     *
+     * @return the boolean
+     */
     public boolean isMutateBackground() {
         return mutateBackground;
     }
 
+    /**
+     * Sets mutate background.
+     *
+     * @param mutate the mutate
+     */
     public void setMutateBackground(boolean mutate) {
         if (mutateBackground == mutate) { return; }
 

@@ -7,7 +7,7 @@ import com.nfky.yaoyijia.model.VcUser;
 
 /**
  * Created by David on 10/12/15.
- *
+ * <p/>
  * DbTest是测试数据库的测试用例类
  */
 public class DbTest extends AndroidTestCase {

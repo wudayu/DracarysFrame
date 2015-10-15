@@ -7,7 +7,7 @@ import android.view.WindowManager;
 
 /**
  * Created by David on 8/25/15.
- *
+ * <p/>
  * 分辨率工具类
  */
 public class DensityUtils {
@@ -41,7 +41,7 @@ public class DensityUtils {
      *
      * @param context 上下文
      * @param spValue sp值
-     * @return px值
+     * @return px值 int
      */
     public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
@@ -52,7 +52,7 @@ public class DensityUtils {
      * 获取ActionBar的高度
      *
      * @param context 上下文
-     * @return ActionBar的高度
+     * @return ActionBar的高度 action bar height
      */
     public static int getActionBarHeight(Context context) {
         TypedArray actionbarSizeTypeArray = context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});

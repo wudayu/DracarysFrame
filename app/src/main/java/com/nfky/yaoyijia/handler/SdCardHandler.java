@@ -7,13 +7,10 @@ import com.nfky.yaoyijia.generic.Utils;
 import com.nfky.yaoyijia.handler.interfaces.ISdCardHandler;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * SDCard相关操作实现类
- *
- **/
-
+ */
 public class SdCardHandler implements ISdCardHandler {
 
     /** Generate Singleton */
@@ -21,6 +18,11 @@ public class SdCardHandler implements ISdCardHandler {
 
     private SdCardHandler() {}
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ISdCardHandler getInstance() {
         if (instance == null) {
             synchronized (SdCardHandler.class) {

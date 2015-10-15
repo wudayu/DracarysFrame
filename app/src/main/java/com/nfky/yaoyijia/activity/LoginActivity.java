@@ -24,7 +24,7 @@ import rx.functions.Func1;
 
 /**
  * Created by David on 8/27/15.
- *
+ * <p/>
  * 登录测试界面
  */
 public class LoginActivity extends BaseActivity {
@@ -37,7 +37,13 @@ public class LoginActivity extends BaseActivity {
     private Button btnRegisterImmediately;
     private Button btnLogin;
 
+    /**
+     * The Pager adapter.
+     */
     ViewPagerAdapter pagerAdapter = null;
+    /**
+     * The Image handler.
+     */
     IImageHandler imageHandler = null;
 
     @Override
@@ -140,6 +146,9 @@ public class LoginActivity extends BaseActivity {
         return view;
     }
 
+    /**
+     * The type Depth page transformer.
+     */
     public class DepthPageTransformer implements ViewPager.PageTransformer {
         public void transformPage(View view, float position) {
             if (position < 0) {

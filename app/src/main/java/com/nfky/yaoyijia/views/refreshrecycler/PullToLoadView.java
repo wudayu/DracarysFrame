@@ -12,7 +12,7 @@ import com.nfky.yaoyijia.R;
 
 /**
  * Created by David on 9/21/15.
- *
+ * <p/>
  * 带有下拉刷新以及上划加载功能的RecyclerView集合
  */
 public class PullToLoadView  extends FrameLayout {
@@ -22,19 +22,43 @@ public class PullToLoadView  extends FrameLayout {
     private ProgressBar mProgressBar;
     private PullCallBack mPullCallBack;
     private RecyclerViewPositionHelper mRecyclerViewHelper;
+    /**
+     * The M cur scrolling direction.
+     */
     protected ScrollDirection mCurScrollingDirection;
+    /**
+     * The M prev first visible item.
+     */
     protected int mPrevFirstVisibleItem = 0;
     private int mLoadMoreOffset = 5;
     private boolean mIsLoadMoreEnabled = false;
 
+    /**
+     * Instantiates a new Pull to load view.
+     *
+     * @param context the context
+     */
     public PullToLoadView(Context context) {
         this(context, null);
     }
 
+    /**
+     * Instantiates a new Pull to load view.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public PullToLoadView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
+    /**
+     * Instantiates a new Pull to load view.
+     *
+     * @param context      the context
+     * @param attrs        the attrs
+     * @param defStyleAttr the def style attr
+     */
     public PullToLoadView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -110,11 +134,17 @@ public class PullToLoadView  extends FrameLayout {
         });
     }
 
+    /**
+     * Sets complete.
+     */
     public void setComplete() {
         mProgressBar.setVisibility(GONE);
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
+    /**
+     * Init load.
+     */
     public void initLoad() {
         if (null != mPullCallBack) {
             mSwipeRefreshLayout.post(new Runnable() {
@@ -127,22 +157,47 @@ public class PullToLoadView  extends FrameLayout {
         }
     }
 
+    /**
+     * Sets color scheme resources.
+     *
+     * @param colorResIds the color res ids
+     */
     public void setColorSchemeResources(int... colorResIds) {
         mSwipeRefreshLayout.setColorSchemeResources(colorResIds);
     }
 
+    /**
+     * Gets recycler view.
+     *
+     * @return the recycler view
+     */
     public RecyclerView getRecyclerView() {
         return this.mRecyclerView;
     }
 
+    /**
+     * Sets pull call back.
+     *
+     * @param mPullCallBack the m pull call back
+     */
     public void setPullCallBack(PullCallBack mPullCallBack) {
         this.mPullCallBack = mPullCallBack;
     }
 
+    /**
+     * Sets load more offset.
+     *
+     * @param mLoadMoreOffset the m load more offset
+     */
     public void setLoadMoreOffset(int mLoadMoreOffset) {
         this.mLoadMoreOffset = mLoadMoreOffset;
     }
 
+    /**
+     * Is load more enabled.
+     *
+     * @param mIsLoadMoreEnabled the m is load more enabled
+     */
     public void isLoadMoreEnabled(boolean mIsLoadMoreEnabled) {
         this.mIsLoadMoreEnabled = mIsLoadMoreEnabled;
     }

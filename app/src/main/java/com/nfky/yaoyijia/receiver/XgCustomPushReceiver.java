@@ -15,13 +15,14 @@ import com.tencent.android.tpush.XGPushShowedResult;
 import com.tencent.android.tpush.XGPushTextMessage;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * 信鸽推送自定义接收者，可以自定义各种操作
- *
  */
 public class XgCustomPushReceiver extends XGPushBaseReceiver {
+    /**
+     * The constant LogTag.
+     */
     public static final String LogTag = "TPushReceiver";
 
     private void show(Context context, String text) {

@@ -11,13 +11,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * SwitchViewPager是可以自动滚动的ViewPager
- *
- **/
-
+ */
 public class SwitchViewPager extends BaseViewPager {
 
 	private static final int ROLL = 0x10;
@@ -27,12 +24,23 @@ public class SwitchViewPager extends BaseViewPager {
 	private boolean isTouching = false;
 	private int timeGap = -1;
 
+	/**
+	 * Instantiates a new Switch view pager.
+	 *
+	 * @param context the context
+	 */
 	public SwitchViewPager(Context context) {
 		super(context);
 
 		init();
 	}
 
+	/**
+	 * Instantiates a new Switch view pager.
+	 *
+	 * @param context the context
+	 * @param attrs   the attrs
+	 */
 	public SwitchViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
@@ -85,6 +93,9 @@ public class SwitchViewPager extends BaseViewPager {
 		return super.onTouchEvent(event);
 	}
 
+	/**
+	 * The M handler.
+	 */
 	@SuppressLint("HandlerLeak")
 	Handler mHandler = new Handler() {
 		@Override
@@ -106,6 +117,11 @@ public class SwitchViewPager extends BaseViewPager {
 		super.onDetachedFromWindow();
 	}
 
+	/**
+	 * Sets time gap.
+	 *
+	 * @param timeGap the time gap
+	 */
 	public void setTimeGap(int timeGap) {
 		this.timeGap = timeGap;
 	}

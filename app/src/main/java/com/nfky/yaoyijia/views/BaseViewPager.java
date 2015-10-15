@@ -5,19 +5,27 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * BaseViewPager继承于support.v4.view.ViewPager。可以修改ViewPager切换时滚动的速度，但这部分代码暂时被注释了
- *
- **/
-
+ */
 public class BaseViewPager extends ViewPager {
 
+	/**
+	 * Instantiates a new Base view pager.
+	 *
+	 * @param context the context
+	 */
 	public BaseViewPager(Context context) {
 		super(context);
 	}
 
+	/**
+	 * Instantiates a new Base view pager.
+	 *
+	 * @param context the context
+	 * @param attrs   the attrs
+	 */
 	public BaseViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}

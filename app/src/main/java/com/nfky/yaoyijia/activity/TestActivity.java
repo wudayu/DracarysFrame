@@ -42,13 +42,10 @@ import com.nfky.yaoyijia.R;
 import com.nfky.yaoyijia.generic.Utils;
 
 /**
- *
  * Created by David on 5/27/15.
- *
+ * <p/>
  * 用来测试内置地图功能
- *
- **/
-
+ */
 public class TestActivity extends BaseActivity implements LocationSource, AMapLocationListener, SensorEventListener, RouteSearch.OnRouteSearchListener {
 
 	private MapView mapView;
@@ -210,6 +207,9 @@ public class TestActivity extends BaseActivity implements LocationSource, AMapLo
     public void onStatusChanged(String provider, int status, Bundle extras) {
     }
 
+    /**
+     * The Count.
+     */
     int count = 0;
     /**
      * 定位成功后回调函数
@@ -262,11 +262,17 @@ public class TestActivity extends BaseActivity implements LocationSource, AMapLo
         unRegisterSensorListener();
     }
 
+    /**
+     * Register sensor listener.
+     */
     public void registerSensorListener() {
         mSensorManager.registerListener(this, mSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    /**
+     * Un register sensor listener.
+     */
     public void unRegisterSensorListener() {
         mSensorManager.unregisterListener(this, mSensor);
     }
@@ -312,7 +318,7 @@ public class TestActivity extends BaseActivity implements LocationSource, AMapLo
      * 获取当前屏幕旋转角度
      *
      * @param context activity
-     * @return 0表示是竖屏; 90表示是左横屏; 180表示是反向竖屏; 270表示是右横屏
+     * @return 0表示是竖屏 ; 90表示是左横屏; 180表示是反向竖屏; 270表示是右横屏
      */
     public static int getScreenRotationOnPhone(Context context) {
         final Display display = ((WindowManager) context
@@ -342,6 +348,9 @@ public class TestActivity extends BaseActivity implements LocationSource, AMapLo
 
     /**
      * 开始搜索路径规划方案
+     *
+     * @param startPoint the start point
+     * @param endPoint   the end point
      */
     public void searchRouteResult(LatLonPoint startPoint, LatLonPoint endPoint) {
         showProcessingDialog(null, true, null);

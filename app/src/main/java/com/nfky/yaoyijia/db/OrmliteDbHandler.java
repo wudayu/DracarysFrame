@@ -12,12 +12,10 @@ import com.nfky.yaoyijia.generic.Utils;
 import com.nfky.yaoyijia.model.VcUser;
 
 /**
- *
  * Created by David on 8/26/15.
- *
+ * <p/>
  * 数据库操作实现类
- *
- **/
+ */
 public class OrmliteDbHandler implements IDbHandler {
 
 	private Context context = null;
@@ -27,7 +25,13 @@ public class OrmliteDbHandler implements IDbHandler {
 
 	private OrmliteDbHandler() {}
 
-    public static IDbHandler getInstance(Context context) {
+	/**
+	 * Gets instance.
+	 *
+	 * @param context the context
+	 * @return the instance
+	 */
+	public static IDbHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (OrmliteDbHandler.class) {
                 if (instance == null) {
@@ -41,6 +45,9 @@ public class OrmliteDbHandler implements IDbHandler {
         return instance;
     }
 
+	/**
+	 * The M database helper.
+	 */
 	DatabaseHelper mDatabaseHelper = null;
 
 	/**

@@ -12,16 +12,23 @@ import java.util.List;
 
 /**
  * Created by David on 9/21/15.
- *
+ * <p/>
  * TestRecyclerViewAdapter展示了一个RecyclerView的Adapter的基本结构，其中还携带了两种不同的ITEM类型
  */
 public class TestRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    // 两种不同的列表项类型
+    /**
+     * The constant ITEM_TYPE_NORMAL. 两种不同的列表项类型
+     */
     public static final int ITEM_TYPE_NORMAL = 0;
+    /**
+     * The constant ITEM_TYPE_FOOTER.
+     */
     public static final int ITEM_TYPE_FOOTER = 1;
 
-    // 数据集
+    /**
+     * 数据集
+     */
     private List<String> mDataset;
 
     /**
@@ -37,7 +44,16 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
      * 定义普通的ViewHolder
      */
     class NormalViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The M text view.
+         */
         public TextView mTextView;
+
+        /**
+         * Instantiates a new Normal view holder.
+         *
+         * @param v the v
+         */
         public NormalViewHolder(View v) {
             super(v);
             mTextView = (TextView) v.findViewById(R.id.tv_test);
@@ -48,6 +64,11 @@ public class TestRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
      * 定义底部的ViewHolder
      */
     class FooterViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * Instantiates a new Footer view holder.
+         *
+         * @param v the v
+         */
         public FooterViewHolder(View v) {
             super(v);
         }

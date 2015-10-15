@@ -25,16 +25,19 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 /**
- *
  * Created by David on 8/27/15.
- *
+ * <p/>
  * imagezoom整个包都是用来支持可控制放大缩小的GestureImageView的控件，可以直接将ImageView用GestureImageView替换
- *
- **/
-
+ */
 public class GestureImageView extends ImageView  {
 
+	/**
+	 * The constant GLOBAL_NS.
+	 */
 	public static final String GLOBAL_NS = "http://schemas.android.com/apk/res/android";
+	/**
+	 * The constant LOCAL_NS.
+	 */
 	public static final String LOCAL_NS = "http://schemas.polites.com/android";
 
 	private final Semaphore drawLock = new Semaphore(0);
@@ -83,10 +86,23 @@ public class GestureImageView extends ImageView  {
 	private OnTouchListener customOnTouchListener;
 	private OnClickListener onClickListener;
 
+	/**
+	 * Instantiates a new Gesture image view.
+	 *
+	 * @param context  the context
+	 * @param attrs    the attrs
+	 * @param defStyle the def style
+	 */
 	public GestureImageView(Context context, AttributeSet attrs, int defStyle) {
 		this(context, attrs);
 	}
 
+	/**
+	 * Instantiates a new Gesture image view.
+	 *
+	 * @param context the context
+	 * @param attrs   the attrs
+	 */
 	public GestureImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
@@ -116,6 +132,11 @@ public class GestureImageView extends ImageView  {
 		initImage();
 	}
 
+	/**
+	 * Instantiates a new Gesture image view.
+	 *
+	 * @param context the context
+	 */
 	public GestureImageView(Context context) {
 		super(context);
 		setScaleType(ScaleType.CENTER_INSIDE);
@@ -165,6 +186,13 @@ public class GestureImageView extends ImageView  {
 		}
 	}
 
+	/**
+	 * Sets canvas.
+	 *
+	 * @param measuredWidth  the measured width
+	 * @param measuredHeight the measured height
+	 * @param orientation    the orientation
+	 */
 	protected void setupCanvas(int measuredWidth, int measuredHeight, int orientation) {
 
 		if(deviceOrientation != orientation) {
@@ -241,12 +269,28 @@ public class GestureImageView extends ImageView  {
 			layout = true;
 		}
 	}
-	
+
+	/**
+	 * Compute crop scale.
+	 *
+	 * @param imageWidth     the image width
+	 * @param imageHeight    the image height
+	 * @param measuredWidth  the measured width
+	 * @param measuredHeight the measured height
+	 */
 	protected void computeCropScale(int imageWidth, int imageHeight, int measuredWidth, int measuredHeight) {
 		fitScaleHorizontal = (float) measuredWidth / (float) imageWidth;
 		fitScaleVertical = (float) measuredHeight / (float) imageHeight;
 	}
-	
+
+	/**
+	 * Compute starting scale.
+	 *
+	 * @param imageWidth     the image width
+	 * @param imageHeight    the image height
+	 * @param measuredWidth  the measured width
+	 * @param measuredHeight the measured height
+	 */
 	@SuppressWarnings("incomplete-switch")
 	protected void computeStartingScale(int imageWidth, int imageHeight, int measuredWidth, int measuredHeight) {
 		switch(getScaleType()) {
@@ -279,6 +323,11 @@ public class GestureImageView extends ImageView  {
 		}
 	}
 
+	/**
+	 * Is recycled boolean.
+	 *
+	 * @return the boolean
+	 */
 	protected boolean isRecycled() {
 		if(drawable != null && drawable instanceof BitmapDrawable) {
 			Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
@@ -289,6 +338,9 @@ public class GestureImageView extends ImageView  {
 		return false;
 	}
 
+	/**
+	 * Recycle.
+	 */
 	protected void recycle() {
 		if(recycle && drawable != null && drawable instanceof BitmapDrawable) {
 			Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
@@ -329,8 +381,10 @@ public class GestureImageView extends ImageView  {
 
 	/**
 	 * Waits for a draw
+	 *
 	 * @param timeout max time to wait for draw (ms)
-	 * @throws InterruptedException
+	 * @return the boolean
+	 * @throws InterruptedException the interrupted exception
 	 */
 	public boolean waitForDraw(long timeout) throws InterruptedException {
 		return drawLock.tryAcquire(timeout, TimeUnit.MILLISECONDS);
@@ -348,12 +402,20 @@ public class GestureImageView extends ImageView  {
 		super.onAttachedToWindow();
 	}
 
+	/**
+	 * Animation start.
+	 *
+	 * @param animation the animation
+	 */
 	public void animationStart(Animation animation) {
 		if(animator != null) {
 			animator.play(animation);
 		}
 	}
 
+	/**
+	 * Animation stop.
+	 */
 	public void animationStop() {
 		if(animator != null) {
 			animator.cancel();
@@ -372,6 +434,9 @@ public class GestureImageView extends ImageView  {
 		super.onDetachedFromWindow();
 	}
 
+	/**
+	 * Init image.
+	 */
 	protected void initImage() {
 		if(this.drawable != null) {
 			this.drawable.setAlpha(alpha);
@@ -408,14 +473,29 @@ public class GestureImageView extends ImageView  {
 		}
 	}
 
+	/**
+	 * Gets scaled width.
+	 *
+	 * @return the scaled width
+	 */
 	public int getScaledWidth() {
 		return Math.round(getImageWidth() * getScale());
 	}
-	
+
+	/**
+	 * Gets scaled height.
+	 *
+	 * @return the scaled height
+	 */
 	public int getScaledHeight() {
 		return Math.round(getImageHeight() * getScale());
 	}
-	
+
+	/**
+	 * Gets image width.
+	 *
+	 * @return the image width
+	 */
 	public int getImageWidth() {
 		if(drawable != null) {
 			return drawable.getIntrinsicWidth();
@@ -423,6 +503,11 @@ public class GestureImageView extends ImageView  {
 		return 0;
 	}
 
+	/**
+	 * Gets image height.
+	 *
+	 * @return the image height
+	 */
 	public int getImageHeight() {
 		if(drawable != null) {
 			return drawable.getIntrinsicHeight();
@@ -430,20 +515,40 @@ public class GestureImageView extends ImageView  {
 		return 0;
 	}
 
+	/**
+	 * Move by.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public void moveBy(float x, float y) {
 		this.x += x;
 		this.y += y;
 	}
 
+	/**
+	 * Sets position.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Redraw.
+	 */
 	public void redraw() {
 		postInvalidate();
 	}
 
+	/**
+	 * Sets min scale.
+	 *
+	 * @param min the min
+	 */
 	public void setMinScale(float min) {
 		this.minScale = min;
 		if(gestureImageViewTouchListener != null) {
@@ -451,6 +556,11 @@ public class GestureImageView extends ImageView  {
 		}
 	}
 
+	/**
+	 * Sets max scale.
+	 *
+	 * @param max the max
+	 */
 	public void setMaxScale(float max) {
 		this.maxScale = max;
 		if(gestureImageViewTouchListener != null) {
@@ -458,38 +568,81 @@ public class GestureImageView extends ImageView  {
 		}
 	}
 
+	/**
+	 * Sets scale.
+	 *
+	 * @param scale the scale
+	 */
 	public void setScale(float scale) {
 		scaleAdjust = scale;
 	}
 
+	/**
+	 * Gets scale.
+	 *
+	 * @return the scale
+	 */
 	public float getScale() {
 		return scaleAdjust;
 	}
 
+	/**
+	 * Gets image x.
+	 *
+	 * @return the image x
+	 */
 	public float getImageX() {
 		return x;
 	}
 
+	/**
+	 * Gets image y.
+	 *
+	 * @return the image y
+	 */
 	public float getImageY() {
 		return y;
 	}
 
+	/**
+	 * Is strict boolean.
+	 *
+	 * @return the boolean
+	 */
 	public boolean isStrict() {
 		return strict;
 	}
 
+	/**
+	 * Sets strict.
+	 *
+	 * @param strict the strict
+	 */
 	public void setStrict(boolean strict) {
 		this.strict = strict;
 	}
 
+	/**
+	 * Is recycle boolean.
+	 *
+	 * @return the boolean
+	 */
 	public boolean isRecycle() {
 		return recycle;
 	}
 
+	/**
+	 * Sets recycle.
+	 *
+	 * @param recycle the recycle
+	 */
 	public void setRecycle(boolean recycle) {
 		this.recycle = recycle;
 	}
 
+	/**
+	 * Reset.
+	 */
 	public void reset() {
 		x = centerX;
 		y = centerY;
@@ -504,10 +657,20 @@ public class GestureImageView extends ImageView  {
 		this.rotation = rotation;
 	}
 
+	/**
+	 * Sets gesture image view listener.
+	 *
+	 * @param pinchImageViewListener the pinch image view listener
+	 */
 	public void setGestureImageViewListener(GestureImageViewListener pinchImageViewListener) {
 		this.gestureImageViewListener = pinchImageViewListener;
 	}
 
+	/**
+	 * Gets gesture image view listener.
+	 *
+	 * @return the gesture image view listener
+	 */
 	public GestureImageViewListener getGestureImageViewListener() {
 		return gestureImageViewListener;
 	}
@@ -666,27 +829,58 @@ public class GestureImageView extends ImageView  {
 	public void setOnTouchListener(OnTouchListener l) {
 		this.customOnTouchListener = l;
 	}
-	
+
+	/**
+	 * Gets center x.
+	 *
+	 * @return the center x
+	 */
 	public float getCenterX() {
 		return centerX;
 	}
-	
+
+	/**
+	 * Gets center y.
+	 *
+	 * @return the center y
+	 */
 	public float getCenterY() {
 		return centerY;
 	}
-	
+
+	/**
+	 * Is landscape boolean.
+	 *
+	 * @return the boolean
+	 */
 	public boolean isLandscape() {
 		return getImageWidth() >= getImageHeight();
 	}
-	
+
+	/**
+	 * Is portrait boolean.
+	 *
+	 * @return the boolean
+	 */
 	public boolean isPortrait() {
 		return getImageWidth() <= getImageHeight();
 	}
-	
+
+	/**
+	 * Sets starting scale.
+	 *
+	 * @param startingScale the starting scale
+	 */
 	public void setStartingScale(float startingScale) {
 		this.startingScale = startingScale;
 	}
-	
+
+	/**
+	 * Sets starting position.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public void setStartingPosition(float x, float y) {
 		this.startX = x;
 		this.startY = y;
@@ -703,7 +897,8 @@ public class GestureImageView extends ImageView  {
 
 	/**
 	 * Returns true if the image dimensions are aligned with the orientation of the device.
-	 * @return
+	 *
+	 * @return boolean
 	 */
 	public boolean isOrientationAligned() {
 		if(deviceOrientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -714,7 +909,12 @@ public class GestureImageView extends ImageView  {
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Gets device orientation.
+	 *
+	 * @return the device orientation
+	 */
 	public int getDeviceOrientation() {
 		return deviceOrientation;
 	}

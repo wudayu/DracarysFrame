@@ -17,17 +17,20 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * JacksonConverter是为Retrofit编写的使用Jackson来解析对象的Json Converter，默认使用的mime_type是 application/json，可以在构造函数中选择text/html
  * 此文件无需修改
- *
- **/
-
+ */
 public class JacksonConverter implements Converter {
 
+	/**
+	 * The constant APPLICATION_JSON_VALUE.
+	 */
 	public static final String APPLICATION_JSON_VALUE = "application/json; charset=UTF-8";
+	/**
+	 * The constant TEXT_HTML_VALUE.
+	 */
 	public static final String TEXT_HTML_VALUE = "text/html; charset=UTF-8";
 
 	private static final String MIME_TYPE = APPLICATION_JSON_VALUE;
@@ -36,18 +39,37 @@ public class JacksonConverter implements Converter {
 	private final ObjectMapper objectMapper;
 	private String currMimeType;
 
+	/**
+	 * Instantiates a new Jackson converter.
+	 */
 	public JacksonConverter() {
 		this(new ObjectMapper());
 	}
 
+	/**
+	 * Instantiates a new Jackson converter.
+	 *
+	 * @param objectMapper the object mapper
+	 */
 	public JacksonConverter(ObjectMapper objectMapper) {
 		this(objectMapper, MIME_TYPE);
 	}
 
+	/**
+	 * Instantiates a new Jackson converter.
+	 *
+	 * @param mimeType the mime type
+	 */
 	public JacksonConverter(String mimeType) {
 		this(new ObjectMapper(), mimeType);
 	}
 
+	/**
+	 * Instantiates a new Jackson converter.
+	 *
+	 * @param objectMapper the object mapper
+	 * @param mimeType     the mime type
+	 */
 	public JacksonConverter(ObjectMapper objectMapper, String mimeType) {
 		this.currMimeType = mimeType;
 		this.objectMapper = objectMapper;

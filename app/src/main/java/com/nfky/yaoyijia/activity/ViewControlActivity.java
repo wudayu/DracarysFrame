@@ -13,13 +13,16 @@ import java.util.List;
 
 /**
  * Created by David on 10/8/15.
- *
+ * <p/>
  * ViewControlActivity是用来对界面元素进行权限控制的一个抽象的Activity
  * 所有需要进行界面控制的Activity必须继承自ViewControlActivity
  */
 public abstract class ViewControlActivity extends BaseActivity {
 
-    // MainApp
+    /**
+     * The M app.
+     */
+// MainApp
     MainApp mApp = (MainApp) this.getApplication();
     // 需要此界面需要权限管理的View集合
     private List<View> controlViews = new ArrayList<>();

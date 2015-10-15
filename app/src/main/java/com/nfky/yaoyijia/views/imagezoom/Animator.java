@@ -1,5 +1,8 @@
 package com.nfky.yaoyijia.views.imagezoom;
 
+/**
+ * The type Animator.
+ */
 public class Animator extends Thread {
 	
 	private GestureImageView view;
@@ -8,6 +11,12 @@ public class Animator extends Thread {
 	private boolean active = false;
 	private long lastTime = -1L;
 
+	/**
+	 * Instantiates a new Animator.
+	 *
+	 * @param view       the view
+	 * @param threadName the thread name
+	 */
 	public Animator(GestureImageView view, String threadName) {
 		super(threadName);
 		this.view = view;
@@ -49,12 +58,20 @@ public class Animator extends Thread {
 		}
 	}
 
+	/**
+	 * Finish.
+	 */
 	public synchronized void finish() {
 		running = false;
 		active = false;
 		notifyAll();
 	}
 
+	/**
+	 * Play.
+	 *
+	 * @param transformer the transformer
+	 */
 	public void play(Animation transformer) {
 		if(active) {
 			cancel();
@@ -63,13 +80,19 @@ public class Animator extends Thread {
  		
  		activate();
 	}
-	
+
+	/**
+	 * Activate.
+	 */
 	public synchronized void activate() {
 		lastTime = System.currentTimeMillis();
 		active = true;
 		notifyAll();
 	}
-	
+
+	/**
+	 * Cancel.
+	 */
 	public void cancel() {
 		active = false;
 	}

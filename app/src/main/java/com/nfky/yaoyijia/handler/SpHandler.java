@@ -8,7 +8,7 @@ import com.nfky.yaoyijia.handler.interfaces.ISpHandler;
 
 /**
  * Created by David on 9/18/15.
- *
+ * <p/>
  * SpHandler 是ISP的实现类，是用于简化SharedPreference操作的类，相关会使用到的键需要写在ISP中
  * 由于SpHandler有两种状态，一种是获取默认Sp文件，一种是获取自定义文件，所以不能用纯粹的单例模式。
  */
@@ -22,6 +22,12 @@ public class SpHandler implements ISpHandler {
 
     private SpHandler() {}
 
+    /**
+     * Gets instance.
+     *
+     * @param context the context
+     * @return the instance
+     */
     public static ISpHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (SpHandler.class) {
@@ -40,6 +46,10 @@ public class SpHandler implements ISpHandler {
 
     /**
      * 若使用特定文件的Sp，为了防止与其他界面的Sp冲突，这里new一个新的SpHandler来记录新值
+     *
+     * @param context  the context
+     * @param fileName the file name
+     * @return the instance
      */
     public static ISpHandler getInstance(Context context, String fileName) {
         SpHandler spSpecificHandler = new SpHandler();

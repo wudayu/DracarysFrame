@@ -15,14 +15,11 @@ import android.widget.PopupWindow;
 import com.nfky.yaoyijia.R;
 
 /**
- *
  * Created by David on 8/27/15.
- *
+ * <p/>
  * SelectPicPopupWindow是一个提示板，用来给用户选择以一种获取图片的方式，由于黑幕的显示不够流畅，需要改进
  * 请不要修改此文件
- *
- **/
-
+ */
 public class SelectPicPopupWindow extends PopupWindow {
 
 	private Button btnTakePhoto, btnPickPhoto, btnCancel;
@@ -71,6 +68,11 @@ public class SelectPicPopupWindow extends PopupWindow {
 		});
 	}
 
+	/**
+	 * Sets on click listener.
+	 *
+	 * @param itemsOnClick the items on click
+	 */
 	public void setOnClickListener(OnClickListener itemsOnClick) {
 		btnPickPhoto.setOnClickListener(itemsOnClick);
 		btnTakePhoto.setOnClickListener(itemsOnClick);

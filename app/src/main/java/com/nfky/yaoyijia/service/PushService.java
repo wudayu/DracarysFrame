@@ -17,22 +17,34 @@ import com.nfky.yaoyijia.net.RetrofitNetHandler;
 import com.nfky.yaoyijia.receiver.PushReceiver;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * PushService是通过向服务器拉取推送来进行推送显示的，PushService的开关是Constant.needPush
  * 不建议使用此类，尽量使用信鸽推送
- *
- **/
-
+ */
 public class PushService extends Service {
 
+	/**
+	 * The Net handler.
+	 */
 	INetHandler netHandler = RetrofitNetHandler.getInstance();
+	/**
+	 * The Notification manager.
+	 */
 	NotificationManager notificationManager = null;
+	/**
+	 * The M app.
+	 */
 	MainApp mApp = null;
 
+	/**
+	 * The Timer.
+	 */
 	Timer timer = null;
 
+	/**
+	 * The constant PUSH_GAP.
+	 */
 	public static final long PUSH_GAP = 5000;
 
 	@Override
@@ -76,11 +88,25 @@ public class PushService extends Service {
 	}
 
 
+	/**
+	 * The type Push timer task.
+	 */
 	class PushTimerTask extends TimerTask {
 
+		/**
+		 * The Context.
+		 */
 		Context context;
+		/**
+		 * The .
+		 */
 		int i;
 
+		/**
+		 * Instantiates a new Push timer task.
+		 *
+		 * @param context the context
+		 */
 		public PushTimerTask(Context context) {
 			this.context = context;
 			this.i = 0;

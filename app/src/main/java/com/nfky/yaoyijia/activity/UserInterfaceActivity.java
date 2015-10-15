@@ -9,7 +9,13 @@ import com.nfky.yaoyijia.R;
  */
 public class UserInterfaceActivity extends ViewControlActivity {
 
+    /**
+     * The Edt test 01.
+     */
     EditText edtTest01;
+    /**
+     * The Edt test 02.
+     */
     EditText edtTest02;
 
     @Override

@@ -19,11 +19,9 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
  * Created by David on 8/28/15.
- *
+ * <p/>
  * 微信支付回调类，在微信执行完一定任务后，就会调用此类相关方法
- *
- **/
-
+ */
 public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler {
 	
     private IWXAPI api;

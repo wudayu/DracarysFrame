@@ -23,16 +23,19 @@ import com.nfky.yaoyijia.net.service.UserService;
 import com.nfky.yaoyijia.net.service.WeatherService;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * RetrofitNetHandler是INetHandler的Retrofit实现，目前本项目仅打算使用Retrofit作为其网络访问框架
- *
- **/
-
+ */
 public class RetrofitNetHandler implements INetHandler {
 
+	/**
+	 * The Weather adapter.
+	 */
 	RestAdapter weatherAdapter = null;
+	/**
+	 * The General adapter.
+	 */
 	RestAdapter generalAdapter = null;
 
 	/** Generate the Singleton */
@@ -46,6 +49,11 @@ public class RetrofitNetHandler implements INetHandler {
 		generalAdapter = new RestAdapter.Builder().setEndpoint(SERVER_URL_FOR_RETROFIT).setConverter(new JacksonConverter()).build();
 	}
 
+	/**
+	 * Gets instance.
+	 *
+	 * @return the instance
+	 */
 	public static INetHandler getInstance() {
 		if (instance == null) {
 			synchronized (RetrofitNetHandler.class) {
@@ -62,7 +70,7 @@ public class RetrofitNetHandler implements INetHandler {
 	 * 供Activity使用，用来打印RetrofitError
 	 *
 	 * @param activity 所调用的Activity
-	 * @param error 需要打印的错误
+	 * @param error    需要打印的错误
 	 */
 	public static void toastNetworkError(Activity activity, RetrofitError error) {
 		if (error.getKind() == RetrofitError.Kind.NETWORK) {
@@ -147,11 +155,21 @@ public class RetrofitNetHandler implements INetHandler {
 	        return "Basic " + Base64.encodeToString(userAndPassword.getBytes(), Base64.NO_WRAP);
 	    }
 
-	    public VcUser getUser() {
+		/**
+		 * Gets user.
+		 *
+		 * @return the user
+		 */
+		public VcUser getUser() {
 	        return user;
 	    }
 
-	    public void setUser(VcUser user) {
+		/**
+		 * Sets user.
+		 *
+		 * @param user the user
+		 */
+		public void setUser(VcUser user) {
 	        this.user = user;
 	    }
 	}

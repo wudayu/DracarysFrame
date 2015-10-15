@@ -22,29 +22,49 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- *
  * Created by David on 5/24/15.
- *
+ * <p/>
  * BaseFragment是所有Fragment的根类。它使用getActivity方法初始化了mContext作为上下文对象
- *
- **/
-
+ */
 public abstract class BaseFragment extends Fragment {
 
-	protected Context mContext = null;
-	// 线程管理Subscription池
+    /**
+     * The M context.
+     */
+    protected Context mContext = null;
+    /**
+     * The Subscriptions. 线程管理Subscription池
+     */
 	List<Subscription> subscriptions = new ArrayList<>();
 
-    /** 初始化界面容器 */
-	protected abstract View initContainer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
-    /** 初始化控件 */
-	protected abstract void initComponents(View fragView);
-    /** 初始化事件 */
-	protected abstract void initEvents();
-    /** 初始化数据 */
-	protected abstract void initData();
-    /** 在一切初始化结束后的程序入口 */
-	protected abstract void afterAllSet();
+    /**
+     * 初始化界面容器  @param inflater the inflater
+     *
+     * @param container          the container
+     * @param savedInstanceState the saved instance state
+     * @return the view
+     */
+    protected abstract View initContainer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+    /**
+     * 初始化控件  @param fragView the frag view
+     */
+    protected abstract void initComponents(View fragView);
+
+    /**
+     * 初始化事件
+     */
+    protected abstract void initEvents();
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
+
+    /**
+     * 在一切初始化结束后的程序入口
+     */
+    protected abstract void afterAllSet();
 
     /**
      * 初始化上下文
@@ -79,18 +99,18 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 抽象Activity中的加载框方法到Fragment中
      *
-     * @param message 需要显示在加载框中的文字
-     * @param cancelable 是否可以由用户来取消此加载框，例如点击后退键或者点击加载框以外的位置
+     * @param message        需要显示在加载框中的文字
+     * @param cancelable     是否可以由用户来取消此加载框，例如点击后退键或者点击加载框以外的位置
      * @param cancelListener 取消加载框之后的事件调用
      */
-	protected void showProcessingDialog(String message, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
+    protected void showProcessingDialog(String message, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
 		((BaseActivity) this.getActivity()).showProcessingDialog(message, cancelable, cancelListener);
 	}
 
     /**
      * 取消加载框
      */
-	protected void dismissProcessingDialog() {
+    protected void dismissProcessingDialog() {
 		((BaseActivity) this.getActivity()).dismissProcessingDialog();
 	}
 
@@ -111,8 +131,8 @@ public abstract class BaseFragment extends Fragment {
      * 创建能够自释放的响应式线程
      *
      * @param threadTag 此响应式线程的String名称，用于打印或标记
-     * @param func 耗时任务的定义
-     * @param observer 监听者，耗时任务完成后执行监听者的方法
+     * @param func      耗时任务的定义
+     * @param observer  监听者，耗时任务完成后执行监听者的方法
      */
     protected void createRxThread(String threadTag, Func1<String, Object> func, Observer<Object> observer) {
         Subscription sub = AppObservable.bindSupportFragment(BaseFragment.this, _getObservable(threadTag, func))

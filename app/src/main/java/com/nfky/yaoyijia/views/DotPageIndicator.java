@@ -22,14 +22,11 @@ import android.view.ViewConfiguration;
 import com.nfky.yaoyijia.R;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * DotPageIndicator是给ViewPager显示个数以及当前所在界面的圆点标记控件
  * 请勿修改此文件
- *
- **/
-
+ */
 public class DotPageIndicator extends View implements PageIndicator {
     private static final int INVALID_POINTER = -1;
 
@@ -53,10 +50,21 @@ public class DotPageIndicator extends View implements PageIndicator {
     private boolean mIsDragging;
 
 
+    /**
+     * Instantiates a new Dot page indicator.
+     *
+     * @param context the context
+     */
     public DotPageIndicator(Context context) {
         this(context, null);
     }
 
+    /**
+     * Instantiates a new Dot page indicator.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public DotPageIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
     
@@ -89,33 +97,68 @@ public class DotPageIndicator extends View implements PageIndicator {
     }
 
 
+    /**
+     * Sets centered.
+     *
+     * @param centered the centered
+     */
     public void setCentered(boolean centered) {
         mCentered = centered;
         invalidate();
     }
 
+    /**
+     * Is centered boolean.
+     *
+     * @return the boolean
+     */
     public boolean isCentered() {
         return mCentered;
     }
 
+    /**
+     * Sets page color.
+     *
+     * @param pageColor the page color
+     */
     public void setPageColor(int pageColor) {
         mPaintPageFill.setColor(pageColor);
         invalidate();
     }
 
+    /**
+     * Gets page color.
+     *
+     * @return the page color
+     */
     public int getPageColor() {
         return mPaintPageFill.getColor();
     }
 
+    /**
+     * Sets fill color.
+     *
+     * @param fillColor the fill color
+     */
     public void setFillColor(int fillColor) {
         mPaintFill.setColor(fillColor);
         invalidate();
     }
 
+    /**
+     * Gets fill color.
+     *
+     * @return the fill color
+     */
     public int getFillColor() {
         return mPaintFill.getColor();
     }
 
+    /**
+     * Sets orientation.
+     *
+     * @param orientation the orientation
+     */
     public void setOrientation(int orientation) {
         switch (orientation) {
             case HORIZONTAL:
@@ -129,42 +172,87 @@ public class DotPageIndicator extends View implements PageIndicator {
         }
     }
 
+    /**
+     * Gets orientation.
+     *
+     * @return the orientation
+     */
     public int getOrientation() {
         return mOrientation;
     }
 
+    /**
+     * Sets stroke color.
+     *
+     * @param strokeColor the stroke color
+     */
     public void setStrokeColor(int strokeColor) {
         mPaintStroke.setColor(strokeColor);
         invalidate();
     }
 
+    /**
+     * Gets stroke color.
+     *
+     * @return the stroke color
+     */
     public int getStrokeColor() {
         return mPaintStroke.getColor();
     }
 
+    /**
+     * Sets stroke width.
+     *
+     * @param strokeWidth the stroke width
+     */
     public void setStrokeWidth(float strokeWidth) {
         mPaintStroke.setStrokeWidth(strokeWidth);
         invalidate();
     }
 
+    /**
+     * Gets stroke width.
+     *
+     * @return the stroke width
+     */
     public float getStrokeWidth() {
         return mPaintStroke.getStrokeWidth();
     }
 
+    /**
+     * Sets radius.
+     *
+     * @param radius the radius
+     */
     public void setRadius(float radius) {
         mRadius = radius;
         invalidate();
     }
 
+    /**
+     * Gets radius.
+     *
+     * @return the radius
+     */
     public float getRadius() {
         return mRadius;
     }
 
+    /**
+     * Sets snap.
+     *
+     * @param snap the snap
+     */
     public void setSnap(boolean snap) {
         mSnap = snap;
         invalidate();
     }
 
+    /**
+     * Is snap boolean.
+     *
+     * @return the boolean
+     */
     public boolean isSnap() {
         return mSnap;
     }
@@ -496,9 +584,20 @@ public class DotPageIndicator extends View implements PageIndicator {
         return savedState;
     }
 
+    /**
+     * The type Saved state.
+     */
     static class SavedState extends BaseSavedState {
+        /**
+         * The Current page.
+         */
         int currentPage;
 
+        /**
+         * Instantiates a new Saved state.
+         *
+         * @param superState the super state
+         */
         public SavedState(Parcelable superState) {
             super(superState);
         }
@@ -514,6 +613,9 @@ public class DotPageIndicator extends View implements PageIndicator {
             dest.writeInt(currentPage);
         }
 
+        /**
+         * The constant CREATOR.
+         */
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {

@@ -7,24 +7,32 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * CountDownView是一个显示倒计时的控件
- *
- **/
-
+ */
 public class CountDownView extends LinearLayout {
 
 	private Context mContext = null;
 	private CountDownTimer mCountDown = null;
 	private OnCountDownFinishListener finishListener = null;
 
+	/**
+	 * Instantiates a new Count down view.
+	 *
+	 * @param context the context
+	 * @param attrs   the attrs
+	 */
 	public CountDownView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
 
+	/**
+	 * Instantiates a new Count down view.
+	 *
+	 * @param context the context
+	 */
 	public CountDownView(Context context) {
 		super(context);
 		init(context);
@@ -38,7 +46,7 @@ public class CountDownView extends LinearLayout {
 	 * 设置时间并开始倒计时
 	 *
 	 * @param totalMillis 总毫秒数量
-	 * @param timeGap 执行onTick的时间间隙
+	 * @param timeGap     执行onTick的时间间隙
 	 */
 	public void setCountDownAndStart(long totalMillis, long timeGap) {
 		// 需要做的就是修改这个TextView的样式
@@ -67,10 +75,21 @@ public class CountDownView extends LinearLayout {
 		mCountDown.start();
 	}
 
+	/**
+	 * The interface On count down finish listener.
+	 */
 	public interface OnCountDownFinishListener {
+		/**
+		 * On finish.
+		 */
 		void onFinish();
 	}
 
+	/**
+	 * Sets on count down finish listener.
+	 *
+	 * @param finishListener the finish listener
+	 */
 	public void setOnCountDownFinishListener(OnCountDownFinishListener finishListener) {
 		this.finishListener = finishListener;
 	}

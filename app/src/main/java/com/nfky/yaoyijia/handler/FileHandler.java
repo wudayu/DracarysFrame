@@ -29,13 +29,14 @@ import com.nfky.yaoyijia.handler.interfaces.IFileHandler;
 
 /**
  * Created by David on 8/26/15.
- *
+ * <p/>
  * Description: FileHandler用来处理文件操作
- *
- **/
-
+ */
 public class FileHandler implements IFileHandler {
 
+	/**
+	 * The constant DEFAULT_ENCODING.
+	 */
 	public static final String DEFAULT_ENCODING = "UTF-8";
 	private Context context = null;
 
@@ -44,7 +45,13 @@ public class FileHandler implements IFileHandler {
 
 	private FileHandler() {}
 
-    public static IFileHandler getInstance(Context context) {
+	/**
+	 * Gets instance.
+	 *
+	 * @param context the context
+	 * @return the instance
+	 */
+	public static IFileHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (FileHandler.class) {
                 if (instance == null) {

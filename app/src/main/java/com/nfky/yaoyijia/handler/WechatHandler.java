@@ -9,13 +9,10 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
- *
  * Created by David on 8/28/15.
- *
+ * <p/>
  * WechatHandler是包含了对微信操作的一系列工具，目前只包含微信支付部分.
- *
- **/
-
+ */
 public class WechatHandler implements IWechatHandler {
 
 	private IWXAPI api = null;
@@ -25,7 +22,13 @@ public class WechatHandler implements IWechatHandler {
 
 	private WechatHandler() {}
 
-    public static IWechatHandler getInstance(Context context) {
+	/**
+	 * Gets instance.
+	 *
+	 * @param context the context
+	 * @return the instance
+	 */
+	public static IWechatHandler getInstance(Context context) {
         if (instance == null) {
             synchronized (WechatHandler.class) {
                 if (instance == null) {

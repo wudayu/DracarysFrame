@@ -30,35 +30,55 @@ import com.nfky.yaoyijia.net.protocol.VcListResult;
 import com.nfky.yaoyijia.views.ProcessingDialog;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * 我的Fragment，主要展示了上传图片的一整套功能
- *
- **/
-
+ */
 public class MineFragment extends BaseFragment {
 
+	/**
+	 * The constant CURR_USER_ID.
+	 */
 	public static final String CURR_USER_ID = "4fef1bb5822e47ca9453443f7fa4820c";
 
-    // 图片容器ImageView
+	/**
+	 * The Iv avatar. 图片容器ImageView
+	 */
 	ImageView ivAvatar = null;
 
-    // Handler声明
+	/**
+	 * The Image handler. Handler声明
+	 */
 	IImageHandler imageHandler = null;
+	/**
+	 * The Net handler.
+	 */
 	INetHandler netHandler = null;
 
-    // 直接拍照的照片的放置路径
+	/**
+	 * The Take picture path. 直接拍照的照片的放置路径
+	 */
 	String takePicturePath = null;
-    // 裁减后的照片的放置路径
+	/**
+	 * The Cutted image path. 裁减后的照片的放置路径
+	 */
 	String cuttedImagePath = null;
-    // 压缩后的图片路径
+	/**
+	 * The File pathes. 压缩后的图片路径
+	 */
 	List<String> filePathes = new ArrayList<>();
-    // 上传完成后的图片uuid
+	/**
+	 * The Uploaded u uid. 上传完成后的图片uuid
+	 */
 	String uploadedUUid = null;
-    // 当前处理到的图片下标
+	/**
+	 * The Curr pic index. 当前处理到的图片下标
+	 */
 	int currPicIndex = -1;
 
+	/**
+	 * The Curr user.
+	 */
 	VcUser currUser = null;
 
     /** 初始化界面容器 */
@@ -116,11 +136,11 @@ public class MineFragment extends BaseFragment {
 		*/
 	}
 
-    /**
-     * 根据选择照片结束后的Uri来获取图片相关信息，并准备进行剪裁压缩
-     *
-     * @param uri 选择照片或者拍照的图片信息
-     */
+	/**
+	 * 根据选择照片结束后的Uri来获取图片相关信息，并准备进行剪裁压缩
+	 *
+	 * @param uri 选择照片或者拍照的图片信息
+	 */
 	public void cutTheImage(Uri uri) {
 		cuttedImagePath = imageHandler.getNewTmpImagePath();
 		imageHandler.cutTheImageHead(this.getActivity(), uri, cuttedImagePath);
@@ -170,11 +190,11 @@ public class MineFragment extends BaseFragment {
 		uploadPic(compressedPath);
 	}
 
-    /**
-     * 调用已经编写好的Retrofit接口上传图片
-     *
-     * @param filePath 图片路径
-     */
+	/**
+	 * 调用已经编写好的Retrofit接口上传图片
+	 *
+	 * @param filePath 图片路径
+	 */
 	void uploadPic(String filePath) {
 		showProcessingDialog("Uploading", false, null);
         /*

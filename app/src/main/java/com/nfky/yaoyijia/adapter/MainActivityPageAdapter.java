@@ -8,16 +8,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
- *
  * Created by David on 5/24/15.
- *
+ * <p/>
  * MainActivityPageAdapter是FragmentPagerAdapter的子类，用来管理MainActivity中的几个Fragments
- *
- **/
-
+ */
 public class MainActivityPageAdapter extends FragmentPagerAdapter {
+	/**
+	 * The Fragments.
+	 */
 	List<Fragment> fragments = null;
 
+	/**
+	 * Instantiates a new Main activity page adapter.
+	 *
+	 * @param fm the fm
+	 */
 	public MainActivityPageAdapter(FragmentManager fm) {
 		super(fm);
 		fragments = new ArrayList<Fragment>();

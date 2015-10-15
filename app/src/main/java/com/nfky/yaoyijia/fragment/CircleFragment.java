@@ -35,22 +35,34 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *
  * Created by David on 8/27/15.
- *
+ * <p/>
  * Description: 第二个界面的Fragment
- *
- **/
-
+ */
 public class CircleFragment extends BaseFragment {
 
 	private final UMSocialService mController = UMServiceFactory.getUMSocialService(Constant.UM_DESCRIPTOR);
 
+	/**
+	 * The Net handler.
+	 */
 	INetHandler netHandler = null;
-    IImageHandler imageHandler = null;
+	/**
+	 * The Image handler.
+	 */
+	IImageHandler imageHandler = null;
 
+	/**
+	 * The Tv weather.
+	 */
 	TextView tvWeather = null;
+	/**
+	 * The Btn share.
+	 */
 	Button btnShare = null;
+	/**
+	 * The Btn scan.
+	 */
 	Button btnScan = null;
 
 	@Override

@@ -2,6 +2,9 @@ package com.nfky.yaoyijia.views.imagezoom;
 
 import android.graphics.PointF;
 
+/**
+ * The type Zoom animation.
+ */
 public class ZoomAnimation implements Animation {
 
 	private boolean firstFrame = true;
@@ -99,48 +102,101 @@ public class ZoomAnimation implements Animation {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Reset.
+	 */
 	public void reset() {
 		firstFrame = true;
 		totalTime = 0;
 	}
 
+	/**
+	 * Gets zoom.
+	 *
+	 * @return the zoom
+	 */
 	public float getZoom() {
 		return zoom;
 	}
-	
+
+	/**
+	 * Sets zoom.
+	 *
+	 * @param zoom the zoom
+	 */
 	public void setZoom(float zoom) {
 		this.zoom = zoom;
 	}
-	
+
+	/**
+	 * Gets touch x.
+	 *
+	 * @return the touch x
+	 */
 	public float getTouchX() {
 		return touchX;
 	}
-	
+
+	/**
+	 * Sets touch x.
+	 *
+	 * @param touchX the touch x
+	 */
 	public void setTouchX(float touchX) {
 		this.touchX = touchX;
 	}
-	
+
+	/**
+	 * Gets touch y.
+	 *
+	 * @return the touch y
+	 */
 	public float getTouchY() {
 		return touchY;
 	}
-	
+
+	/**
+	 * Sets touch y.
+	 *
+	 * @param touchY the touch y
+	 */
 	public void setTouchY(float touchY) {
 		this.touchY = touchY;
 	}
-	
+
+	/**
+	 * Gets animation length ms.
+	 *
+	 * @return the animation length ms
+	 */
 	public long getAnimationLengthMS() {
 		return animationLengthMS;
 	}
-	
+
+	/**
+	 * Sets animation length ms.
+	 *
+	 * @param animationLengthMS the animation length ms
+	 */
 	public void setAnimationLengthMS(long animationLengthMS) {
 		this.animationLengthMS = animationLengthMS;
 	}
-	
+
+	/**
+	 * Gets zoom animation listener.
+	 *
+	 * @return the zoom animation listener
+	 */
 	public ZoomAnimationListener getZoomAnimationListener() {
 		return zoomAnimationListener;
 	}
-	
+
+	/**
+	 * Sets zoom animation listener.
+	 *
+	 * @param zoomAnimationListener the zoom animation listener
+	 */
 	public void setZoomAnimationListener(ZoomAnimationListener zoomAnimationListener) {
 		this.zoomAnimationListener = zoomAnimationListener;
 	}

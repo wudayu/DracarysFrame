@@ -10,33 +10,59 @@ import com.nfky.yaoyijia.net.protocol.VcUserResult;
 import com.nfky.yaoyijia.net.protocol.WeatherResult;
 
 /**
- *
  * Created by David on 8/25/15.
- *
+ * <p/>
  * INetHandler是网络访问接口，其中还包括了网络地址等信息
- *
- **/
-
+ */
 public interface INetHandler {
 
 	/** 两种Schema */
+	/**
+	 * The constant PREFIX_HTTP.
+	 */
 	String PREFIX_HTTP = "http://";
+	/**
+	 * The constant PREFIX_HTTPS.
+	 */
 	String PREFIX_HTTPS = "https://";
-	/** 测试地址和发布地址（客户环境） */
+	/**
+	 * 测试地址和发布地址（客户环境）
+	 */
 	String SERVER_URL_TEST = "172.18.50.206:8080/server-core";
+	/**
+	 * The constant SERVER_URL_OFFICAL_PRE.
+	 */
 	String SERVER_URL_OFFICAL_PRE = "serveu.xwzf.gov.cn/server-core";
+	/**
+	 * The constant SERVER_URL_OFFICAL.
+	 */
 	String SERVER_URL_OFFICAL = "";
-	/** 默认的Schema前缀 */
+	/**
+	 * 默认的Schema前缀
+	 */
 	String PREFIX_DEFAULT = PREFIX_HTTP;
-	/** Server URL Names TODO Switch to the last one when publish */
+	/**
+	 * Server URL Names TODO Switch to the last one when publish
+	 */
 //	String SERVER_URL_NAME = SERVER_URL_TEST;
 	String SERVER_URL_NAME = SERVER_URL_OFFICAL_PRE;
 //	String SERVER_URL_NAME = SERVER_URL_OFFICAL;
 
-	/** 被继承此类的类所使用的参数 */
+	/**
+	 * 被继承此类的类所使用的参数
+	 */
 	String SERVER_URL_FOR_RETROFIT = PREFIX_DEFAULT + SERVER_URL_NAME;
+	/**
+	 * The constant SERVER_URL_WEATHER.
+	 */
 	String SERVER_URL_WEATHER = "http://www.weather.com.cn/data/cityinfo";
+	/**
+	 * The constant CONTANT_CODE.
+	 */
 	String CONTANT_CODE = "UTF-8";
+	/**
+	 * The constant UPLOAD_PIC_FILE_KEY.
+	 */
 	String UPLOAD_PIC_FILE_KEY = "attachFile";
 
 	/** Http Headers
@@ -56,15 +82,41 @@ public interface INetHandler {
 	 * Methods Below *
 	 *****************/
 
-	/** 获取天气信息 */
+	/**
+	 * 获取天气信息  @param code the code
+	 *
+	 * @param cb the cb
+	 */
 	void getForWeather(String code, Callback<WeatherResult> cb);
 
-	/** 获取用户信息 */
+	/**
+	 * 获取用户信息  @param userId the user id
+	 *
+	 * @param cb the cb
+	 */
 	void getForUserInfo(String userId, Callback<VcObjectResult<VcUser>> cb);
-    void getForGetTestUser(String userId, Callback<VcObjectResult<VcTestUser>> cb);
 
-	/** 上传图片 */
-    void postForUploadSinglePic(String imagePath, Callback<VcListResult<String>> cb);
-    void postForUploadMultiplePic(String[] imagePaths, Callback<VcListResult<String>> cb);
+	/**
+	 * Gets for get test user.
+	 *
+	 * @param userId the user id
+	 * @param cb     the cb
+	 */
+	void getForGetTestUser(String userId, Callback<VcObjectResult<VcTestUser>> cb);
+
+	/**
+	 * 上传图片  @param imagePath the image path
+	 *
+	 * @param cb the cb
+	 */
+	void postForUploadSinglePic(String imagePath, Callback<VcListResult<String>> cb);
+
+	/**
+	 * Post for upload multiple pic.
+	 *
+	 * @param imagePaths the image paths
+	 * @param cb         the cb
+	 */
+	void postForUploadMultiplePic(String[] imagePaths, Callback<VcListResult<String>> cb);
 
 }

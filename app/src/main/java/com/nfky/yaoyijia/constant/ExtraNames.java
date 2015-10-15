@@ -1,25 +1,30 @@
 package com.nfky.yaoyijia.constant;
 
 /**
- *
  * Created by David on 5/24/15.
- *
+ * <p/>
  * 在组件间传递数据使用.
- *
- **/
-
+ */
 public class ExtraNames {
 
-	// 推送类型
+	/**
+	 * The constant PUSH_TYPE. 推送类型
+	 */
 	public static final String PUSH_TYPE = "PushType";
 
-	// 推送是否成功
+	/**
+	 * The constant IS_PAY_SUCCESSED. 推送是否成功
+	 */
 	public static final String IS_PAY_SUCCESSED = "IsPaySucceded";
 
-	// 支付订单号
+	/**
+	 * The constant PAY_NUM. 支付订单号
+	 */
 	public static final String PAY_NUM = "PayNum";
 
-	// 支付类型
+	/**
+	 * The constant PAY_MODE. 支付类型
+	 */
 	public static final String PAY_MODE = "PayMode";
 
 }

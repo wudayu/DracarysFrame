@@ -26,33 +26,52 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- *
  * Created by David on 8/24/15.
- *
+ * <p/>
  * BaseActivity是一切Activity的父类，它包括一个用来关闭所有Activity的本地广播。除此之外，如果我们希望让所有Activity都做某件事情的话，我们需要将其放在BaseActivity中去做
- *
- **/
-
+ */
 public abstract class BaseActivity extends FragmentActivity {
 
-	// 通用上下文
+	/**
+	 * The M context. 通用上下文
+	 */
 	protected Context mContext;
-    // 通用加载框，可以自定义加载框中显示的文字内容
+	/**
+	 * The Processing dialog. 通用加载框，可以自定义加载框中显示的文字内容
+	 */
 	protected ProcessingDialog processingDialog = null;
-    // 已保存实例状态
+	/**
+	 * The Saved instance state. 已保存实例状态
+	 */
 	protected Bundle savedInstanceState = null;
-	// 线程管理Subscription池
+	/**
+	 * The Subscriptions. 线程管理Subscription池
+	 */
 	List<Subscription> subscriptions = new ArrayList<>();
 
-	/** 初始化界面容器 */
+	/**
+	 * 初始化界面容器
+	 */
 	protected abstract void initContainer();
-	/** 初始化控件 */
+
+	/**
+	 * 初始化控件
+	 */
 	protected abstract void initComponents();
-	/** 初始化事件 */
+
+	/**
+	 * 初始化事件
+	 */
 	protected abstract void initEvents();
-	/** 初始化数据 */
+
+	/**
+	 * 初始化数据
+	 */
 	protected abstract void initData();
-	/** 在一切初始化结束后的程序入口 */
+
+	/**
+	 * 在一切初始化结束后的程序入口
+	 */
 	protected abstract void afterAllSet();
 
     /**
@@ -103,20 +122,20 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onDestroy();
 	}
 
-    /**
-     * 发送关闭所有Activity广播的方法
-     */
+	/**
+	 * 发送关闭所有Activity广播的方法
+	 */
 	protected void closeAllActivity() {
 		LocalBroadcastManager.getInstance(BaseActivity.this).sendBroadcast(new Intent(BroadcastActions.FINISH_ACTIVITY));
 	}
 
-    /**
-     * 显示加载框
-     *
-     * @param message 需要显示在加载框中的文字
-     * @param cancelable 是否可以由用户来取消此加载框，例如点击后退键或者点击加载框以外的位置
-     * @param cancelListener 取消加载框之后的事件调用
-     */
+	/**
+	 * 显示加载框
+	 *
+	 * @param message        需要显示在加载框中的文字
+	 * @param cancelable     是否可以由用户来取消此加载框，例如点击后退键或者点击加载框以外的位置
+	 * @param cancelListener 取消加载框之后的事件调用
+	 */
 	public void showProcessingDialog(String message, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
         if (message == null) {
             processingDialog = new ProcessingDialog(this, cancelable, cancelListener);
@@ -127,32 +146,32 @@ public abstract class BaseActivity extends FragmentActivity {
 		processingDialog.show();
 	}
 
-    /**
-     * 取消加载框
-     */
+	/**
+	 * 取消加载框
+	 */
 	public void dismissProcessingDialog() {
 		if (processingDialog != null) {
 			processingDialog.dismiss();
 		}
 	}
 
-    /**
-     * 关闭此界面，默认被通用的Activity头部使用，如果后退键有其他的功能，则需要重新实现这个方法
-     *
-     * @param view 被点击的后退按钮
-     */
+	/**
+	 * 关闭此界面，默认被通用的Activity头部使用，如果后退键有其他的功能，则需要重新实现这个方法
+	 *
+	 * @param view 被点击的后退按钮
+	 */
 	public void finishThis(View view) {
 		this.finish();
 	}
 
-    /**
-     * 创建能够自释放的响应式线程
-     *
-     * @param threadTag 此响应式线程的String名称，用于打印或标记
-     * @param func 耗时任务的定义
-     * @param observer 监听者，耗时任务完成后执行监听者的方法
-     */
-    protected void createRxThread(String threadTag, Func1<String, Object> func, Observer<Object> observer) {
+	/**
+	 * 创建能够自释放的响应式线程
+	 *
+	 * @param threadTag 此响应式线程的String名称，用于打印或标记
+	 * @param func      耗时任务的定义
+	 * @param observer  监听者，耗时任务完成后执行监听者的方法
+	 */
+	protected void createRxThread(String threadTag, Func1<String, Object> func, Observer<Object> observer) {
         Subscription sub = AppObservable.bindActivity(BaseActivity.this, _getObservable(threadTag, func))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

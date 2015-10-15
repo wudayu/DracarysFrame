@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 
+/**
+ * The type Gesture image view touch listener.
+ */
 public class GestureImageViewTouchListener implements OnTouchListener {
 	
 	private GestureImageView image;
@@ -66,6 +69,13 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 	private GestureDetector flingDetector;
 	private GestureImageViewListener imageListener;
 
+	/**
+	 * Instantiates a new Gesture image view touch listener.
+	 *
+	 * @param image         the image
+	 * @param displayWidth  the display width
+	 * @param displayHeight the display height
+	 */
 	public GestureImageViewTouchListener(final GestureImageView image, int displayWidth, int displayHeight) {
 		super();
 		
@@ -339,7 +349,10 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 		
 		return true;
 	}
-	
+
+	/**
+	 * Handle up.
+	 */
 	protected void handleUp() {
 		
 		multiTouch = false;
@@ -379,7 +392,14 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 		
 		image.redraw();
 	}
-	
+
+	/**
+	 * Handle scale.
+	 *
+	 * @param scale the scale
+	 * @param x     the x
+	 * @param y     the y
+	 */
 	protected void handleScale(float scale, float x, float y) {
 		
 		currentScale = scale;
@@ -407,7 +427,14 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 		
 		image.redraw();
 	}
-	
+
+	/**
+	 * Handle drag boolean.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the boolean
+	 */
 	protected boolean handleDrag(float x, float y) {
 		current.x = x;
 		current.y = y;
@@ -438,7 +465,10 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 		
 		return false;
 	}
-	
+
+	/**
+	 * Reset.
+	 */
 	public void reset() {
 		currentScale = startingScale;
 		next.x = centerX;
@@ -448,44 +478,92 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 		image.setPosition(next.x, next.y);
 		image.redraw();
 	}
-	
-	
+
+
+	/**
+	 * Gets max scale.
+	 *
+	 * @return the max scale
+	 */
 	public float getMaxScale() {
 		return maxScale;
 	}
 
+	/**
+	 * Sets max scale.
+	 *
+	 * @param maxScale the max scale
+	 */
 	public void setMaxScale(float maxScale) {
 		this.maxScale = maxScale;
 	}
 
+	/**
+	 * Gets min scale.
+	 *
+	 * @return the min scale
+	 */
 	public float getMinScale() {
 		return minScale;
 	}
 
+	/**
+	 * Sets min scale.
+	 *
+	 * @param minScale the min scale
+	 */
 	public void setMinScale(float minScale) {
 		this.minScale = minScale;
 	}
-	
+
+	/**
+	 * Sets on click listener.
+	 *
+	 * @param onClickListener the on click listener
+	 */
 	public void setOnClickListener(OnClickListener onClickListener) {
 		this.onClickListener = onClickListener;
 	}
 
+	/**
+	 * Sets canvas width.
+	 *
+	 * @param canvasWidth the canvas width
+	 */
 	protected void setCanvasWidth(int canvasWidth) {
 		this.canvasWidth = canvasWidth;
 	}
-	
+
+	/**
+	 * Sets canvas height.
+	 *
+	 * @param canvasHeight the canvas height
+	 */
 	protected void setCanvasHeight(int canvasHeight) {
 		this.canvasHeight = canvasHeight;
 	}
 
+	/**
+	 * Sets fit scale horizontal.
+	 *
+	 * @param fitScale the fit scale
+	 */
 	protected void setFitScaleHorizontal(float fitScale) {
 		this.fitScaleHorizontal = fitScale;
 	}
 
+	/**
+	 * Sets fit scale vertical.
+	 *
+	 * @param fitScaleVertical the fit scale vertical
+	 */
 	protected void setFitScaleVertical(float fitScaleVertical) {
 		this.fitScaleVertical = fitScaleVertical;
 	}
 
+	/**
+	 * Bound coordinates.
+	 */
 	protected void boundCoordinates() {
 		if(next.x < boundaryLeft) {
 			next.x = boundaryLeft;
@@ -501,7 +579,10 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 			next.y = boundaryBottom;
 		}
 	}
-	
+
+	/**
+	 * Calculate boundaries.
+	 */
 	protected void calculateBoundaries() {
 		
 		int effectiveWidth = Math.round( (float) imageWidth * currentScale );

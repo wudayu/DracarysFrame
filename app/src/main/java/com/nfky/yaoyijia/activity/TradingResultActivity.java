@@ -14,18 +14,27 @@ import com.nfky.yaoyijia.net.INetHandler;
 import com.nfky.yaoyijia.net.RetrofitNetHandler;
 
 /**
- *
  * Created by David on 5/28/15.
- *
+ * <p/>
  * Description: TradingResultActivity是微信支付的回调类在回调之后所前往的页面
- *
- **/
-
+ */
 public class TradingResultActivity extends BaseActivity {
 
+	/**
+	 * The Btn my order.
+	 */
 	Button btnMyOrder = null;
+	/**
+	 * The Btn purchase.
+	 */
 	Button btnPurchase = null;
+	/**
+	 * The Tv info.
+	 */
 	TextView tvInfo = null;
+	/**
+	 * The Net handler.
+	 */
 	INetHandler netHandler = RetrofitNetHandler.getInstance();
 
 	private String payNum = null;
