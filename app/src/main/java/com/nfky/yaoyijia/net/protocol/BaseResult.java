@@ -15,19 +15,19 @@ public class BaseResult {
     /**
      * The constant RC_REQUEST_FINISHED. 成功返回
      */
-    public static final int RC_REQUEST_FINISHED = 200;
+    public static final int RC_REQUEST_FINISHED = 0x101;
     /**
      * The constant RC_SESSION_OUTOFDATE. Token过期
      */
-    public static final int RC_SESSION_OUTOFDATE = 401;
+    public static final int RC_SESSION_OUTOFDATE = 0x103;
     /**
      * The constant RC_VERSION_OUTOFDATE. 版本需要更新
      */
-    public static final int RC_VERSION_OUTOFDATE = 404;
+    public static final int RC_VERSION_OUTOFDATE = 0x104;
     /**
      * The constant RC_SERVER_CANT_HANDLE. 服务端无法处理
      */
-    public static final int RC_SERVER_CANT_HANDLE = 500;
+    public static final int RC_SERVER_CANT_HANDLE = 0x105;
 
 
     /** messageType 返回的消息类型 */
