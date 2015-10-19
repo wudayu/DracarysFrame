@@ -46,8 +46,8 @@ public class MockGpsService extends Service {
     }
 
     private void testMockGps() {
-        //double longitude = 118.893913, latitude = 32.092321;
-        double longitude = 104.087853, latitude = 30.710432;
+        double longitude = 118.893913, latitude = 32.092321;
+        // double longitude = 104.087853, latitude = 30.710432;
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         String mMockProviderName = LocationManager.GPS_PROVIDER;
         Location location = new Location(mMockProviderName);
