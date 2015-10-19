@@ -27,4 +27,13 @@
         android:layout_marginLeft="@dimen/dp20"
         android:layout_marginRight="@dimen/dp20"
         style="@style/BtnStyleLargeApp" />
+    <Button
+        android:id="@+id/btn_simulate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp35"
+        android:text="模拟"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        style="@style/BtnStyleLargeApp" />
 </LinearLayout>

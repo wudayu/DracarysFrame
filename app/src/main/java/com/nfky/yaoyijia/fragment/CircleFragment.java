@@ -1,8 +1,13 @@
 package com.nfky.yaoyijia.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +27,16 @@ import com.nfky.yaoyijia.image.UILImageHandler;
 import com.nfky.yaoyijia.net.INetHandler;
 import com.nfky.yaoyijia.net.RetrofitNetHandler;
 import com.nfky.yaoyijia.net.protocol.WeatherResult;
+import com.nfky.yaoyijia.service.MockGpsService;
 import com.nfky.yaoyijia.views.ProcessingDialog;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.media.UMImage;
 
+import java.lang.reflect.Method;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -65,7 +73,17 @@ public class CircleFragment extends BaseFragment {
 	 */
 	Button btnScan = null;
 
-	@Override
+	/**
+	 * The Btn Simulate
+	 */
+	Button btnSimulate = null;
+
+    /**
+     * The service intent
+     */
+    Intent mService = null;
+
+    @Override
 	protected View initContainer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_circle, null);
 	}
@@ -75,6 +93,7 @@ public class CircleFragment extends BaseFragment {
 		tvWeather = (TextView) fragView.findViewById(R.id.tv_weather);
 		btnShare = (Button) fragView.findViewById(R.id.btn_share);
 		btnScan = (Button) fragView.findViewById(R.id.btn_scan);
+		btnSimulate = (Button) fragView.findViewById(R.id.btn_simulate);
 
 		netHandler = RetrofitNetHandler.getInstance();
         imageHandler = UILImageHandler.getInstance(this.getActivity());
@@ -154,6 +173,18 @@ public class CircleFragment extends BaseFragment {
 				integrator.setCameraId(0);  // Use a specific camera of the device
 				integrator.setBeepEnabled(false);
 				integrator.initiateScan();
+			}
+		});
+		btnSimulate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+                if (mService == null) {
+                    mService = new Intent(CircleFragment.this.getActivity(), MockGpsService.class);
+                    getContext().startService(mService);
+                } else {
+                    getContext().stopService(mService);
+                    mService = null;
+                }
 			}
 		});
 	}
