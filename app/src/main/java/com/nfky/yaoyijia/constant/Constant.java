@@ -16,7 +16,7 @@ public class Constant {
 	/**
 	 * 应用Log的TAG
 	 */
-	public static final String TAG = "com.nkfy.yaoyijia";
+	public static final String TAG = "com.nfky.yaoyijia";
 
 	/**
 	 * 图片压缩质量百分比
